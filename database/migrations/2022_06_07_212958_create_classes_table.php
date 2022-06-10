@@ -20,7 +20,8 @@ class CreateClassesTable extends Migration
             $table->string('cycle');
             $table->string('section');
             $table->boolean('finDeCycle')->default(0);
-            $table->integer('effectifTotal');
+            $table->integer('effectifTotal')->default(0);
+            $table->integer('capacite');
             $table->string('classeSuperieure');
             $table->timestamps();
         });

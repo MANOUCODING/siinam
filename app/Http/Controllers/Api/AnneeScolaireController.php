@@ -18,9 +18,9 @@ class AnneeScolaireController extends BaseController
 
     public function index(){
 
-        $anneeScoalires = AnneeScolaire::all();
+        $anneeScolaires = AnneeScolaire::all();
 
-        if (count($anneeScoalires) == 0) {
+        if (count($anneeScolaires) == 0) {
 
             return response()->json([
                 'message' => 'Aucune rentrée scolaire n\'est enregistrée',
@@ -30,7 +30,7 @@ class AnneeScolaireController extends BaseController
 
             return response()->json([
                 'message' => 'liste de toutes les rentrées scolaires',
-                'anneeScoalires' => $anneeScoalires
+                'anneeScolaires' => $anneeScolaires
             ], 201);
 
         }
@@ -88,9 +88,9 @@ class AnneeScolaireController extends BaseController
 
             $datas['anneeScolaire'] = $anneeDebut.'-'.$anneeFin ;
 
-            $anneeScoalire = AnneeScolaire::create($datas);
+            $anneeScolaire = AnneeScolaire::create($datas);
 
-            return $this->sendResponse( $anneeScoalire, 'Une Nouvelle Rentrée Scoalire a été enregistre avec succès.');
+            return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scoalire a été enregistre avec succès.');
 
         }else{
             return $this->sendError('Ooops Desolé. La date de fin est anterieure à la date du debut');
@@ -108,9 +108,9 @@ class AnneeScolaireController extends BaseController
     {
 
         try {
-            $anneeScoalire = AnneeScolaire::findOrFail($id);
+            $anneeScolaire = AnneeScolaire::findOrFail($id);
 
-            return response()->json([$anneeScoalire]);
+            return response()->json([$anneeScolaire]);
 
         } catch (ModelNotFoundException $modelNotFoundException){
 
@@ -152,11 +152,11 @@ class AnneeScolaireController extends BaseController
 
             $datas['anneeScolaire'] = $anneeDebut.'-'.$anneeFin ;
 
-            $anneeScoalire = AnneeScolaire::findOrFail($id);
+            $anneeScolaire = AnneeScolaire::findOrFail($id);
 
-            $anneeScoalire->update($datas);
+            $anneeScolaire->update($datas);
 
-            return $this->sendResponse( $anneeScoalire, 'Une Nouvelle Rentrée Scoalire a été modifiée avec succès.');
+            return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scoalire a été modifiée avec succès.');
 
         }else{
             return $this->sendError('Ooops Desolé. La date de fin est anterieure à la date du debut');
@@ -173,13 +173,29 @@ class AnneeScolaireController extends BaseController
     public function active(Request $request, $id)
     {
 
-        $anneeScoalire = AnneeScolaire::findOrFail($id);
+        $anneeScolaireMoment = AnneeScolaire::where('status', 'En Cours')->get();
+
+        if (count($anneeScolaireMoment) == 1) {
+
+            $anneeScolaireMoment->status = "Terminée";
+
+            $anneeScolaire = AnneeScolaire::findOrFail($id);
+            
+            $anneeScolaire->status = "En Cours";
+
+            $anneeScolaire->update();
+
+        }else{
+
+            $anneeScolaire = AnneeScolaire::findOrFail($id);
         
-        $anneeScoalire->status = "En Cours";
+            $anneeScolaire->status = "En Cours";
 
-        $anneeScoalire->update();
+            $anneeScolaire->update();
 
-        return $this->sendResponse( $anneeScoalire, 'Une Nouvelle Rentrée Scoalire a été mise en cours.');
+        }
+
+        return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scoalire a été mise en cours.');
     }
     /**
      * Remove the specified resource from storage.
@@ -189,9 +205,9 @@ class AnneeScolaireController extends BaseController
      */
     public function destroy($id)
     {
-        $anneeScoalire = AnneeScolaire::findOrFail($id);
-        $anneeScoalire->delete();
-        return $this->sendResponse($anneeScoalire, 'La Rentrée scolaire  a été supprimée avec succès.');
+        $anneeScolaire = AnneeScolaire::findOrFail($id);
+        $anneeScolaire->delete();
+        return $this->sendResponse($anneeScolaire, 'La Rentrée scolaire  a été supprimée avec succès.');
     }
 }
 

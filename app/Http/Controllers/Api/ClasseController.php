@@ -47,14 +47,13 @@ class ClasseController extends BaseController
         return response()->json([
             'message' => 'Formulaire d\'enregistrement',
             'classes' => [
-                'nomEtablissement' => '',
-                'addressLine1' => '',
-                'addressLine2' => '',
-                'nomResponsable' => '',
-                'posteResponsable' => '',
-                'nomDRE' => '',
-                'nomIESEG' => ''
-
+                'nomClasse' => '',
+                'codeClasse' => '',
+                'cycle' => ['Premier', 'Deuxième'],
+                'section' => ['Lycée', 'Collège'],
+                'finDeCycle' => 0,
+                'classeSuperieure' => Classe::all(),
+                'capacite' => 0
             ],
            
         ], 201);
@@ -72,20 +71,20 @@ class ClasseController extends BaseController
 
         $datas = $request->all();
         $validator = Validator::make($datas, [
-            'nomEtablissement' => 'required|string|between:2,100',
-            'addressLine1' => 'required|string',
-            'addressLine2' => 'required|string',
-            'nomResponsable' => 'required|string|between:2,100',
-            'posteResponsable' => 'required|string',
-            'nomDRE' => 'required|string',
-            'nomIESEG' => 'required|string',
+            'nomClasse' => 'required|string|between:2,100',
+            'codeClasse' => 'required|string',
+            'cycle' => 'required|string',
+            'section' => 'required|string|between:2,100',
+            'finDeCycle' => 'required|integer',
+            'classeSuperieure' => 'required|string',
+            'capacite' => 'required|integer',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
        $classe = Classe::create($datas);
 
-        return $this->sendResponse($classe, 'Informations de l\'ecole enregistrées avec succès.');
+        return $this->sendResponse($classe, 'La classe a été enregistrée avec succès.');
     }
    
 
@@ -121,23 +120,25 @@ class ClasseController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    { 
         $datas = $request->all();
         $validator = Validator::make($datas, [
-            'nomEtablissement' => 'required|string|between:2,100',
-            'addressLine1' => 'required|string',
-            'addressLine2' => 'required|string',
-            'nomResponsable' => 'required|string|between:2,100',
-            'posteResponsable' => 'required|string',
-            'nomDRE' => 'required|string',
-            'nomIESEG' => 'required|string',
+            'nomClasse' => 'required|string|between:2,100',
+            'codeClasse' => 'required|string',
+            'cycle' => 'required|string',
+            'section' => 'required|string|between:2,100',
+            'finDeCycle' => 'required|integer',
+            'classeSuperieure' => 'required|string',
+            'capacite' => 'required|integer',
         ]);
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
-       $classe = Classe::findOrFail($id);
 
-       $classe->update($datas);
+        $classe = Classe::findOrFail($id);
+
+        $classe->update($datas);
 
         return $this->sendResponse($classe, 'Informations de l\'ecole modifiées avec succès.');
     }
