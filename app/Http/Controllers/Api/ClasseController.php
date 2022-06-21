@@ -19,20 +19,41 @@ class ClasseController extends BaseController
 
     public function index(){
 
-       $classes = Classe::all();
+       $classes = Classe::count();
 
-        if (count($classes) == 0) {
+       $classesCollege = Classe::where('section', 'Collège')->get();
+
+       $classesLyceeModerne = Classe::where('section', 'Lycée Moderne')->get();
+
+       $classesLyceeTechnique = Classe::where('section', 'Lycée Technique')->get();
+
+       $classesCollegeCount = Classe::where('section', 'Collège')->count();
+
+       $classesLyceeModerneCount = Classe::where('section', 'Lycée Moderne')->count();
+
+       $classesLyceeTechniqueCount = Classe::where('section', 'Lycée Technique')->count();
+
+        if ($classes == 0) {
 
             return response()->json([
                 'message' => 'Aucune classe n\'est enregistrée',
-            ], 201);
+                'classesCollegeCount' => $classesCollegeCount,
+                'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+            ], 200);
 
         } else {
 
             return response()->json([
                 'message' => 'liste de toutes les classes',
-                'classes' =>$classes
-            ], 201);
+                'classesCollege' => $classesCollege,
+                'classesLyceeModerne' => $classesLyceeModerne,
+                'classesLyceeTechnique' => $classesLyceeTechnique,
+                'classesCollegeCount' => $classesCollegeCount,
+                'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+
+            ], 200);
 
         }
     }
@@ -56,9 +77,9 @@ class ClasseController extends BaseController
                 'classeSuperieure' => Classe::all(),
                 'capacite' => 0
             ],
-           
-        ], 201);
-        
+
+        ], 200);
+
     }
 
     /**
@@ -67,7 +88,7 @@ class ClasseController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     
+
     public function store(Request $request) {
 
         $datas = $request->all();
@@ -87,7 +108,7 @@ class ClasseController extends BaseController
 
         return $this->sendResponse($classe, 'La classe a été enregistrée avec succès.');
     }
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -101,7 +122,7 @@ class ClasseController extends BaseController
         try {
            $classe = Classe::findOrFail($id);
 
-            
+
 
             return response()->json([$classe]);
 
@@ -110,7 +131,7 @@ class ClasseController extends BaseController
             return $this->sendError('Aucune Information trouvée.');
 
         }
-        
+
     }
 
     /**
@@ -121,7 +142,7 @@ class ClasseController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
+    {
         $datas = $request->all();
         $validator = Validator::make($datas, [
             'nomClasse' => 'required|string|between:2,100',
@@ -199,7 +220,7 @@ class ClasseController extends BaseController
 
         if (($classe->section == "Collège") || ($classe->section == "Lycée Technique")) {
 
-            for ($i=0; $i < $datas['nbreSousClasses'] ; $i++) { 
+            for ($i=0; $i < $datas['nbreSousClasses'] ; $i++) {
 
                $sousClasse = [
 
@@ -217,25 +238,25 @@ class ClasseController extends BaseController
 
         }else {
 
-            for ($i=0; $i < $datas['nbreSousClasses'] ; $i++) { 
+            for ($i=0; $i < $datas['nbreSousClasses'] ; $i++) {
 
                 $sousClasse = [
- 
+
                  'codeClasse' => $classe->codeClasse.'-'.$i,
- 
+
                  'nomClasse' => $classe->nomClasse.'-'.$i,
- 
+
                  'classe_id' => $classe->id
- 
+
                 ];
- 
+
                 SousClasse::create($sousClasse);
- 
+
              }
-           
+
         }
-        
-        
+
+
         return $this->sendResponse( $classe, 'Les sous classes ont ete créées avec succès ');
     }
 

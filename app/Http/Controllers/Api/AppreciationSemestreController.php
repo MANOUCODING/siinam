@@ -24,7 +24,7 @@ class AppreciationSemestreController extends  BaseController
 
             return response()->json([
                 'message' => 'Aucune appréciation par semestre n\'est enregistrée',
-            ], 201);
+            ], 200);
 
         } else {
 
@@ -49,9 +49,9 @@ class AppreciationSemestreController extends  BaseController
                 'moyFort' => '',
                 'appreciation' => '',
             ],
-           
-        ], 201);
-        
+
+        ], 200);
+
     }
 
     /**
@@ -60,7 +60,7 @@ class AppreciationSemestreController extends  BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     
+
     public function store(Request $request) {
 
         $datas = $request->all();
@@ -71,7 +71,7 @@ class AppreciationSemestreController extends  BaseController
             'moyFaible' => 'required|integer',
             'moyFort' => 'required|integer',
         ]);
-        
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
@@ -94,9 +94,9 @@ class AppreciationSemestreController extends  BaseController
         } else {
             return $this->sendError('Ooops ! Desolé, vos moyennes doivent être positive et compris entre 0 et 20');
         }
-       
+
     }
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -118,7 +118,7 @@ class AppreciationSemestreController extends  BaseController
             return $this->sendError('Aucune appréciation trouvée.');
 
         }
-        
+
     }
 
     /**
@@ -138,7 +138,7 @@ class AppreciationSemestreController extends  BaseController
             'moyFaible' => 'required|integer',
             'moyFort' => 'required|integer',
         ]);
-        
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }

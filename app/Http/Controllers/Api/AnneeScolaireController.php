@@ -24,14 +24,14 @@ class AnneeScolaireController extends BaseController
 
             return response()->json([
                 'message' => 'Aucune rentrée scolaire n\'est enregistrée',
-            ], 201);
+            ], 200);
 
         } else {
 
             return response()->json([
                 'message' => 'liste de toutes les rentrées scolaires',
                 'anneeScolaires' => $anneeScolaires
-            ], 201);
+            ], 200);
 
         }
     }
@@ -51,9 +51,9 @@ class AnneeScolaireController extends BaseController
                 'dateFin' => '',
                 'TypePeriode' => '',
             ],
-           
-        ], 201);
-        
+
+        ], 200);
+
     }
 
     /**
@@ -62,7 +62,7 @@ class AnneeScolaireController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     
+
     public function store(Request $request) {
 
         $datas = $request->all();
@@ -71,7 +71,7 @@ class AnneeScolaireController extends BaseController
             'dateFin' => 'required|date_format:d/m/Y',
             'TypePeriode' => 'required|string',
         ]);
-        
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
@@ -96,7 +96,7 @@ class AnneeScolaireController extends BaseController
             return $this->sendError('Ooops Desolé. La date de fin est anterieure à la date du debut');
         }
     }
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -117,7 +117,7 @@ class AnneeScolaireController extends BaseController
             return $this->sendError('Aucune Information trouvée.');
 
         }
-        
+
     }
 
     /**
@@ -180,7 +180,7 @@ class AnneeScolaireController extends BaseController
             $anneeScolaireMoment->status = "Terminée";
 
             $anneeScolaire = AnneeScolaire::findOrFail($id);
-            
+
             $anneeScolaire->status = "En Cours";
 
             $anneeScolaire->update();
@@ -188,7 +188,7 @@ class AnneeScolaireController extends BaseController
         }else{
 
             $anneeScolaire = AnneeScolaire::findOrFail($id);
-        
+
             $anneeScolaire->status = "En Cours";
 
             $anneeScolaire->update();

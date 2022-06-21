@@ -24,7 +24,7 @@ class DecisionConseilController extends BaseController
 
             return response()->json([
                 'message' => 'Aucune décision n\'est enregistrée',
-            ], 201);
+            ], 200);
 
         } else {
 
@@ -52,9 +52,9 @@ class DecisionConseilController extends BaseController
                 'dejaRedoublerDansCycle' => 1,
                 'detailsDecision' => '',
             ],
-           
-        ], 201);
-        
+
+        ], 200);
+
     }
 
     /**
@@ -63,7 +63,7 @@ class DecisionConseilController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     
+
     public function store(Request $request) {
 
         $datas = $request->all();
@@ -77,7 +77,7 @@ class DecisionConseilController extends BaseController
             'dejaRedoublerDansCycle' => 'required|integer',
             'detailsDecision' => 'required|string',
         ]);
-        
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
@@ -101,9 +101,9 @@ class DecisionConseilController extends BaseController
         } else {
             return $this->sendError('Ooops ! Desolé, vos moyennes doivent être positive et compris entre 0 et 20');
         }
-       
+
     }
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -125,7 +125,7 @@ class DecisionConseilController extends BaseController
             return $this->sendError('Aucune décision trouvée.');
 
         }
-        
+
     }
 
     /**
@@ -148,7 +148,7 @@ class DecisionConseilController extends BaseController
             'dejaRedoublerDansCycle' => 'required|integer',
             'detailsDecision' => 'required|string',
         ]);
-        
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }

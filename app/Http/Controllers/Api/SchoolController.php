@@ -56,9 +56,9 @@ class SchoolController extends BaseController
                 'nomIESEG' => ''
 
             ],
-           
+
         ], 201);
-        
+
     }
 
     /**
@@ -67,10 +67,11 @@ class SchoolController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     
+
     public function store(Request $request) {
 
         $datas = $request->all();
+
         $validator = Validator::make($datas, [
             'nomEtablissement' => 'required|string|between:2,100',
             'addressLine1' => 'required|string',
@@ -80,14 +81,18 @@ class SchoolController extends BaseController
             'nomDRE' => 'required|string',
             'nomIESEG' => 'required|string',
         ]);
+
         if($validator->fails()){
+
             return response()->json($validator->errors()->toJson(), 400);
+
         }
+        
         $school = School::create($datas);
 
         return $this->sendResponse($school, 'Informations de l\'ecole enregistrées avec succès.');
     }
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -101,7 +106,7 @@ class SchoolController extends BaseController
         try {
             $school = School::findOrFail($id);
 
-            
+
 
             return response()->json([$school]);
 
@@ -110,7 +115,7 @@ class SchoolController extends BaseController
             return $this->sendError('Aucune Information trouvée.');
 
         }
-        
+
     }
 
     /**

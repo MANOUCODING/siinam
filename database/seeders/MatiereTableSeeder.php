@@ -39,11 +39,11 @@ class MatiereTableSeeder extends Seeder
                 'OrdreBulletin' => 8,
             ],
 
-           
+
         ];
 
         foreach ($matieresScientifiques as $matieresScientifiques) {
-           
+
             Matiere::create($matieresScientifiques);
 
         }
@@ -92,11 +92,11 @@ class MatiereTableSeeder extends Seeder
                 'Categorie' => 'Matières Littéraires',
                 'OrdreBulletin' => 12,
             ],
-           
+
         ];
 
         foreach ($matieresLitteraires  as $matiereLitteraires ) {
-           
+
             Matiere::create($matiereLitteraires );
 
         }
@@ -106,15 +106,15 @@ class MatiereTableSeeder extends Seeder
             [
                 'codeMatiere' => 'EPS',
                 'nomMatiere' => 'Education Physique et Sportive',
-                'Categorie' => 'Matières Littéraires',
+                'Categorie' => 'Matières Facultatives',
                 'OrdreBulletin' => 13,
             ],
-            
-           
+
+
         ];
 
         foreach ($matieresFacultatives  as $matiereFacultatives) {
-           
+
             Matiere::create($matiereFacultatives);
 
         }

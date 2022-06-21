@@ -33,7 +33,7 @@
                    <div>
                         <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"CreateEnseignantComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-plus"></i>Ajouter un enseignant</router-link>
                     </div>
-                  <div class="card-body">
+                  <div class="card-body"  v-if="empty == 0">
                       <table class="table table-bordered">
                           <thead>
                             <tr>
@@ -57,6 +57,18 @@
                           </tbody>
                       </table>
                   </div>
+                  <div class="card-body" v-else>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div style="position: relative; height: 400px;">
+                                <img src="/assets/admin/images/empty.png" style="width: 250px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                            </div>
+                            <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                  </div>
               </div>
           </div>
           <!-- ============================================================== -->
@@ -72,6 +84,42 @@
 </template>
 <script>
 export default {
-  
+
+  data() {
+      return {
+        infos: {},
+        empty : '',
+        message: "",
+      }
+  },
+
+  methods: {
+    getResults(){
+      axios
+        .get('/api/enseignants')
+        .then(response => {
+           console.log(response)
+          if(response.status == 200){
+            if (response.data.success == false) {
+
+            }else{
+              if (response.data.message == 'Aucun enseignant n\'est enregistrée') {
+                this.empty = 1
+                this.message = response.data.message
+              } else {
+                this.empty = 0
+                this.infos = response.data
+                console.log(response.data)
+              }
+            }
+          }
+      });
+    },
+  },
+
+  mounted() {
+      this.getResults();
+    }
+
 }
 </script>

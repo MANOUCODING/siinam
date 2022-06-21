@@ -27,6 +27,7 @@
           <!-- ============================================================== -->
           <!-- bordered table -->
           <!-- ============================================================== -->
+
           <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
                   <h5 class="card-header">Ajouter un enseignant</h5>
@@ -37,56 +38,121 @@
                       <form>
                       <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <h5>Choisir une photo</h5>
-                          <div class="custom-file mb-3">
-                              <input type="file" class="custom-file-input" id="customFile">
-                              <label class="custom-file-label" for="customFile">Choisir une photo de profil</label>
-                          </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div class="form-group">
-                              <label for="inputText3" class="col-form-label">Nom</label>
-                              <input id="inputText3" type="text" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div class="form-group">
-                              <label for="inputText3" class="col-form-label">Prénoms</label>
-                              <input id="inputText3" type="text" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div class="form-group">
-                              <label for="inputText3" class="col-form-label">Email</label>
-                              <input id="inputText3" type="email" placeholder="name@example.com" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div class="form-group">
-                              <label for="inputText3" class="col-form-label">Telephone</label>
-                              <input id="inputText3" type="number" class="form-control" placeholder="Numero de telephone">
-                          </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Mot de passe</label>
-                            <input id="inputText3" type="password"  class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Adresse</label>
-                            <input id="inputText3" type="text" class="form-control">
-                          </div>
-                        </div>
-
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <br> 
-                          <div class="form-group">
-                            <button class="btn btn-lg  btn-primary  btn-block" type="button">Enregistrer</button>
-                          </div>
+                            <h5>Choisir une photo</h5>
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choisir une photo de profil</label>
+                            </div>
                         </div>
                       </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" v-if="!errors.nom">
+                                    <label>Nom</label> <br>
+                                    <input type="text" name="nom"  v-model="data.nom" class="form-control"  required>
+                                </div>
+                                <div class="form-group" v-else>
+                                    <label for="validationServer03">Nom</label> <br>
+                                    <input type="text" name="nom"  v-model="data.nom" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                                    <div  v-for=" error_nom in errors.nom" :key="error_nom"  class="invalid-feedback" style="color: red; font-size: 0.9em">
+                                        {{ error_nom }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" v-if="!errors.prenoms">
+                                    <label>Prénoms</label> <br>
+                                    <input type="text" name="prenoms"  v-model="data.prenoms" class="form-control"  required>
+                                </div>
+                                <div class="form-group" v-else>
+                                    <label for="validationServer03">Prénoms</label> <br>
+                                    <input type="text" name="prenoms"  v-model="data.prenoms" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                                    <div v-for=" error_prenoms in errors.prenoms" :key="error_prenoms" style="color: red; font-size: 0.9em" >
+                                        {{ error_prenoms }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" v-if="!errors.email">
+                                    <label>Email</label> <br>
+                                    <input  type="email" name="email"  v-model="data.email" class="form-control"  required>
+                                </div>
+                                <div class="form-group" v-else>
+                                    <label for="validationServer03">Email</label> <br>
+                                    <input type="email" name="email"  v-model="data.email" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                                    <div v-for=" error_email in errors.email" :key="error_email"  style="color: red; font-size: 0.9em">
+                                        {{ error_email }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group" v-if="!errors.telephone">
+                                    <label>Teléphone</label> <br>
+                                    <input  type="text" name="telephone_1"  v-model="data.telephone" class="form-control"  required>
+                                </div>
+                                <div class="form-group" v-else>
+                                    <label for="validationServer03">Teléphone</label> <br>
+                                    <input type="text" name="telephone_1"  v-model="data.telephone" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                                    <div v-for=" error_telephone_1 in errors.telephone" :key="error_telephone"  style="color: red; font-size: 0.9em">
+                                        {{ error_telephone }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <br>
+
+                        <div class="row"> <br>
+                            <div class="col-md-6">
+                                <div v-if="!errors.sexe">
+                                    <h5>Choisir le sexe</h5>
+                                    <div class="input-group mb-3">
+                                        <select class="custom-select " name="sexe" v-model="data.sexe">
+                                            <option value="M">Masculin</option>
+                                            <option value="F">Féminin</option>
+                                            <option value="ND">Non Déterminé</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <h5>Choisir le sexe</h5>
+                                    <div>
+                                        <select class="custom-select is-invalid" name="sexe" v-model="data.sexe">
+                                            <option value="M">Masculin</option>
+                                            <option value="F">Féminin</option>
+                                            <option value="ND">Non Déterminé</option>
+                                        </select>
+                                    </div>
+                                    <div v-for="error_sexeH in errors.sexe" :key="error_sexeH" style="color: red; font-size: 0.9em">
+                                        {{ error_sexeH }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" v-if="!errors.adresse"> <br>
+                                    <label>Adresse</label>
+                                    <input type="text" name="adresse"  v-model="data.adresse" class="form-control"  required>
+                                </div>
+                                <div class="form-group" v-else> <br>
+                                    <label for="validationServer03">adresse</label>
+                                    <input type="text" name="adresse"  v-model="data.adresse" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                                    <div  v-for=" error_adresse in errors.adresse" :key="error_adresse"  class="invalid-feedback" style="color: red; font-size: 0.9em">
+                                        {{ error_adresse }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="float: right">
+                            <div class="my-3" v-if="loadingSave">
+                                <button class="btn  btn-primary"  type="button">
+                                    Enregistrement en cours ....
+                                </button>
+                            </div>
+                            <div class="my-3" v-if="!loadingSave">
+                                <button type="submit" class="btn btn-primary" @click.prevent="create" >Enregistrez</button>
+                            </div>
+                        </div>
                     </form>
                   </div>
               </div>
@@ -103,7 +169,55 @@
   </div>
 </template>
 <script>
-export default {
-  
-}
+ export default {
+        name:"create-users",
+        data(){
+            return{
+                data:{
+                    nom : "",
+                    prenoms:"",
+                    email:"",
+                    telephone:"",
+                    sexe:"",
+                    adresse:"",
+                },
+                errors: {},
+                errorcheck: true,
+                loadingSave: false,
+            }
+        },
+        methods: {
+           create(){
+                this.loadingSave = true
+                axios.post('/api/enseignants/store', {
+                nom: this.data.nom,
+                prenoms: this.data.prenoms,
+                email: this.data.email,
+                telephone: this.data.telephone,
+                sexe: this.data.sexe,
+                adresse: this.data.adresse,
+                })
+                .then(response => {
+                   if (response.data.success == true) {
+                       this.$swal({
+                            title: "Succès!",
+                            text: response.data.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                        this.$router.push({name:"EnseignantsComponent"})
+                   } else {
+                       this.errorcheck = false
+                       this.errors = response.data.errors
+                       this.loadingSave = false
+                       console.log(this.errors)
+                   }
+                }).catch(error => console.log(error))
+           }
+        },
+        mounted(){
+            console.log('Component Mounted')
+        },
+    }
 </script>

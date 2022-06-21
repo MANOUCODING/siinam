@@ -18,20 +18,40 @@ class MatiereController extends BaseController
 
     public function index(){
 
-        $matieres = Matiere::all();
+        $matieres = Matiere::count();
 
-        if (count($matieres) == 0) {
+        $MatieresScientifiques = Matiere::where('Categorie', 'Matières Scientifiques')->get();
+
+        $MatieresLitteraires = Matiere::where('Categorie', 'Matières Littéraires')->get();
+
+        $MatieresFacultatives = Matiere::where('Categorie', 'Matières Facultatives')->get();
+
+        $MatieresScientifiquesCount = Matiere::where('Categorie', 'Matières Scientifiques')->count();
+
+        $MatieresLitterairesCount = Matiere::where('Categorie', 'Matières Littéraires')->count();
+
+        $MatieresFacultativesCount = Matiere::where('Categorie', 'Matières Facultatives')->count();
+
+        if ($matieres == 0) {
 
             return response()->json([
                 'message' => 'Aucune matière n\'est enregistrée',
-            ], 201);
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+            ], 200);
 
         } else {
 
             return response()->json([
                 'message' => 'liste de toutes les matières',
-                'matières' => $matieres
-            ], 201);
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+                'MatieresScientifiques' =>  $MatieresScientifiques,
+                'MatièresLitteraires' => $MatieresLitteraires,
+                'MatièresFacultatives' => $MatieresFacultatives,
+            ], 200);
 
         }
     }
@@ -52,8 +72,8 @@ class MatiereController extends BaseController
                 'Categorie' => ['Matières Scientifiques', 'Matières Littéraires', 'Matières Facultatives'],
                 'OrdreBulletin' => '',
             ],
-        ], 201);
-        
+        ], 200);
+
     }
 
     /**
@@ -62,7 +82,7 @@ class MatiereController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     
+
     public function store(Request $request) {
 
         $datas = $request->all();
@@ -82,7 +102,7 @@ class MatiereController extends BaseController
 
         return $this->sendResponse($matiere, 'La matière a été enregistrée avec succès.');
     }
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -103,7 +123,7 @@ class MatiereController extends BaseController
             return $this->sendError('Aucune Information trouvée.');
 
         }
-        
+
     }
 
     /**
@@ -115,7 +135,7 @@ class MatiereController extends BaseController
      */
     public function update(Request $request, $id)
     {
-       
+
         $datas = $request->all();
 
         $validator = Validator::make($datas, [

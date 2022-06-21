@@ -10,10 +10,10 @@
                 </div>
             </div>
           </div>
-          
+
       </div>
       <div class="email-body">
-        <div class="row" v-if="empty">
+        <div class="row" v-if="!empty">
           <div class="col-md-4">
             <img src="/assets/admin/images/coordonnees.png" style="height: 200px; width: 200px;" alt="coordonnees"> <br>
             <div class="card">
@@ -30,7 +30,7 @@
                               <small class="text-muted">Brief description</small>
                           </div>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                           <div>
                               <h6 class="my-0">Poste du Responsable</h6>
@@ -40,7 +40,7 @@
                   </ul>
                 </div>
               </div>
-          </div>
+            </div>
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header">
@@ -67,13 +67,13 @@
                               <h6 class="my-0">Addresse ligne 2</h6>
                           </div>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between bg-light">
+                      <li class="list-group-item d-flex justify-content-between ">
                           <div class="text-success">
                               <h6 class="my-0">Nom DRE</h6>
                               <small>EXAMPLECODE</small>
                           </div>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between bg-light">
+                      <li class="list-group-item d-flex justify-content-between ">
                           <div class="text-success">
                               <h6 class="my-0">Nom IESEG</h6>
                               <small>EXAMPLECODE</small>
@@ -85,16 +85,18 @@
             </div>
           </div>
           <div class="row" v-else>
-              <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <img src="/assets/admin/images/empty.png" alt="empty"> <br>
-                <h6> {{ message  }} </h6>
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <div style="position: relative; height: 500px;">
+                    <img src="/assets/admin/images/empty.png" style="width: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                </div>
+                <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
               </div>
-              <div class="col-md-2"></div>
+              <div class="col-md-3"></div>
           </div>
         </div>
       </div>
-   
+
   </div>
 
 </template>
@@ -104,7 +106,7 @@ export default {
   data() {
       return {
         coordonnes: {},
-        empty : true,
+        empty : 1,
         message: "",
       }
   },
@@ -117,14 +119,12 @@ export default {
            console.log(response)
           if(response.status == 200){
             if (response.data.success == false) {
-                
+
             }else{
               if (response.data.message == 'Aucune information n\'est enregistrée') {
-                this.empty = true
                 this.message = response.data.message
-                console.log(response.data)
               } else {
-                this.empty = false
+                this.empty = 0
                 this.coordonnes = response.data.school
                 console.log(response.data)
               }
@@ -137,6 +137,6 @@ export default {
   mounted() {
       this.getResults();
     }
-  
+
 }
 </script>

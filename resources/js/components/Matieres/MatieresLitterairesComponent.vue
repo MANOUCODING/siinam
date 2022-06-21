@@ -7,12 +7,12 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h3 class="mb-2">Les Matières littéraires</h3>
+                    <h3 class="mb-2">Les Matières litteraires</h3>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Gestion des matières</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Liste de toutes les matières littéraires</li>
+                                <li class="breadcrumb-item active" aria-current="page">Liste de toutes les matières litteraires</li>
                             </ol>
                         </nav>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <div class="d-inline-block">
                         <h5 class="text-muted">Littéraires</h5>
-                        <h2 class="mb-0"> 10,28,056</h2>
+                        <h2 class="mb-0"> {{ infos.MatieresLitterairesCount  }} </h2>
                     </div>
                     <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                         <i class="fas fa-book fa-fw fa-sm text-info"></i>
@@ -41,7 +41,7 @@
                 </div>
               </div>
             </router-link>
-            
+
           </div>
           <!-- ============================================================== -->
           <!-- end total views   -->
@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <div class="d-inline-block">
                         <h5 class="text-muted">Scientifiques</h5>
-                        <h2 class="mb-0"> 24,763</h2>
+                        <h2 class="mb-0">{{ infos.MatieresScientifiquesCount  }}</h2>
                     </div>
                     <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
                         <i class="fas fa-book fa-fw fa-sm text-primary"></i>
@@ -76,7 +76,7 @@
                 <div class="card-body">
                     <div class="d-inline-block">
                         <h5 class="text-muted">Facultatifs</h5>
-                        <h2 class="mb-0">14</h2>
+                        <h2 class="mb-0">{{ infos.MatieresFacultativesCount  }}</h2>
                     </div>
                     <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
                         <i class="fas fa-book fa-fw fa-sm text-secondary"></i>
@@ -85,7 +85,7 @@
               </div>
             </router-link>
           </div>
-          
+
         </div>
 
         <!-- ============================================================== -->
@@ -97,8 +97,8 @@
           <!-- ============================================================== -->
           <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
-                  <h5 class="card-header">Liste des matières littéraires</h5>
-                  <div class="card-body">
+                  <h5 class="card-header">Liste des matières litteraires</h5>
+                  <div class="card-body" v-if="!empty">
                       <table class="table table-bordered">
                           <thead>
                             <tr>
@@ -121,6 +121,18 @@
                           </tbody>
                       </table>
                   </div>
+                  <div class="card-body" v-else>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div style="position: relative; height: 400px;">
+                                <img src="/assets/admin/images/empty.png" style="width: 250px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                            </div>
+                            <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                  </div>
               </div>
           </div>
           <!-- ============================================================== -->
@@ -136,6 +148,42 @@
 </template>
 <script>
 export default {
-  
+
+  data() {
+      return {
+        infos: {},
+        empty : 1,
+        message: "",
+      }
+  },
+
+  methods: {
+    getResults(){
+      axios
+        .get('/api/matieres')
+        .then(response => {
+          if(response.status == 200){
+            if (response.data.success == false) {
+
+            }else{
+              if (response.data.message == 'Aucune matière n\'est enregistrée') {
+                this.message = response.data.message
+                this.infos = response.data
+                console.log(this.message)
+              } else {
+                this.empty = 0
+                this.infos = response.data
+                console.log(response.data)
+              }
+            }
+          }
+      });
+    },
+  },
+
+  mounted() {
+      this.getResults();
+    }
+
 }
 </script>
