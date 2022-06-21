@@ -24,14 +24,14 @@ class SchoolController extends BaseController
 
             return response()->json([
                 'message' => 'Aucune information n\'est enregistrée',
-            ], 201);
+            ], 200);
 
         } else {
 
             return response()->json([
                 'message' => 'liste de toutes les informations',
                 'school' => $school
-            ], 201);
+            ], 200);
 
         }
     }

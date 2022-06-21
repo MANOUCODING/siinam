@@ -22,7 +22,8 @@ class CreateClassesTable extends Migration
             $table->boolean('finDeCycle')->default(0);
             $table->integer('effectifTotal')->default(0);
             $table->integer('capacite');
-            $table->string('classeSuperieure');
+            $table->string('classeSuperieure')->nullable();
+            $table->boolean('sousClasses')->default(0);
             $table->timestamps();
         });
     }

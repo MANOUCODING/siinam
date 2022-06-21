@@ -6,6 +6,29 @@ import DashboardComponent from '../components/DashboardComponent.vue';
 
 import LoginComponent from '../components/LoginComponent.vue';
 
+//Importer les composants de la gestion des classes
+
+import ClasseLyceeModerneComponent from '../components/Classes/ClasseLyceeModerneComponent.vue';
+
+import ClassesCollegeComponent from '../components/Classes/ClassesCollegeComponent.vue';
+
+import ClasseLyceeTechniqueComponnent from '../components/Classes/ClasseLyceeTechniqueComponnent.vue';
+
+//Importer les composants de la gestion des matières
+
+import MatieresScientifiquesComponent from '../components/Matieres/MatieresScientifiquesComponent.vue';
+
+import MatieresLitterairesComponent from '../components/Matieres/MatieresLitterairesComponent.vue';
+
+import MatieresFacultatifsComponent from '../components/Matieres/MatieresFacultatifsComponent.vue';
+
+//Importer les composants de la gestion des matières
+
+import EnseignantsComponent from '../components/Enseignants/EnseignantsComponent.vue';
+
+import CreateEnseignantComponent from '../components/Enseignants/CreateEnseignantComponent.vue';
+
+
 //Importer les composants des paramètres
 
 import SettingsHomeComponent from '../components/Settings/HomeComponent.vue';
@@ -42,7 +65,71 @@ const routes = [
     path: '/dashboard',
     component:  DashboardComponent,
     name: 'dashboard'
-  }, 
+  },
+  
+  //Gestion des classes 
+  
+  //Collège 
+  {
+    path: '/classes/college',
+    component:  ClassesCollegeComponent ,
+    name: 'ClassesCollegeComponent'
+  },
+
+  //Lycée Moderne
+  {
+    path: '/classes/lyceemoderne',
+    component:  ClasseLyceeModerneComponent,
+    name: 'ClasseLyceeModerneComponent'
+  },
+
+  //Lycée Technique
+  {
+    path: '/classes/lyceetechnique',
+    component:  ClasseLyceeTechniqueComponnent,
+    name: 'ClasseLyceeTechniqueComponnent'
+  },
+
+  //Gestion des Matières
+
+  //Matières Scientifiques
+  {
+    path: '/matieres/scientifiques',
+    component:  MatieresScientifiquesComponent,
+    name: 'MatieresScientifiquesComponent'
+  },
+
+  //Matières Littéraires
+  {
+    path: '/matieres/litteraires',
+    component:  MatieresLitterairesComponent,
+    name: 'MatieresLitterairesComponent'
+  },
+
+  //Matières Facultatifs
+  {
+    path: '/matieres/facultatifs',
+    component:  MatieresFacultatifsComponent,
+    name: 'MatieresFacultatifsComponent'
+  },
+
+  //Gestion des enseignants
+
+  //Liste des enseignants
+  
+  {
+    path: '/enseignants',
+    component:  EnseignantsComponent,
+    name: 'EnseignantsComponent'
+  },
+
+  //Ajouter un enseignant
+  {
+    path: '/enseignants/create',
+    component:  CreateEnseignantComponent,
+    name: 'CreateEnseignantComponent'
+  },
+
 
   //Gerer les routes pour les paramètres de l'application
 

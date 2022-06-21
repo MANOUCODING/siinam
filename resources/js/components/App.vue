@@ -41,17 +41,7 @@
 	                        </li>
 
                            <li class="nav-item">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class=" fas fa-home"></i>Gestion des Classes</a>
-	                            <div id="submenu-9" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/map-google.html">Google Maps</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/map-vector.html">Vector Maps</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                            <router-link class="nav-link" to="/classes/college"><i class=" fas fa-home"></i>Gestion des Classes</router-link>
 	                        </li>
 
 	                        <li class="nav-item">
@@ -109,54 +99,15 @@
 	                        </li>
 
                           <li class="nav-item">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-book"></i>Gestion des Matières</a>
-	                            <div id="submenu-9" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/map-google.html">Google Maps</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/map-vector.html">Vector Maps</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                            <router-link class="nav-link" to="/matieres/litteraires"><i class="fas fa-book"></i>Gestion des Matières</router-link>
 	                        </li>
 
 	                        <li class="nav-item ">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fas fa-user-circle"></i>Gestion des Enseignants</a>
-	                            <div id="submenu-4" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/form-elements.html">Form Elements</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/form-validation.html">Parsely Validations</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/multiselect.html">Multiselect</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/datepicker.html">Date Picker</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/bootstrap-select.html">Bootstrap Select</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                            <router-link class="nav-link" to="/enseignants"><i class="fas fa-user-circle"></i>Gestion des Enseignants</router-link>
 	                        </li>
 
                           <li class="nav-item">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class=" fas fa-bars"></i>Gestion des Affections</a>
-	                            <div id="submenu-9" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/map-google.html">Google Maps</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/map-vector.html">Vector Maps</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                            <router-link class="nav-link" to="/affectations"><i class=" fas fa-bars"></i>Gestion des Affections</router-link>
 	                        </li>
 
 	                        

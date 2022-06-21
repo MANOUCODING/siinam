@@ -16,10 +16,9 @@ class CreateSousClassesTable extends Migration
         Schema::create('sous_classes', function (Blueprint $table) {
             $table->id();
             $table->string('codeClasse');
-            $table->integer('effectif');
-            $table->unsignedBigInteger('enseignant_id');
+            $table->string('nomClasse');
+            $table->integer('effectif')->default(0);
             $table->unsignedBigInteger('classe_id');
-            $table->foreign('enseignant_id')->references('id')->on('enseignants');
             $table->foreign('classe_id')->references('id')->on('classes');
             $table->timestamps();
         });
