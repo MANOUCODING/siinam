@@ -54,6 +54,42 @@
 
 <script>
 export default {
- 
+
+  data() {
+      return {
+        infos: {},
+        empty : 1,
+        message: "",
+      }
+  },
+
+  methods: {
+    getResults(){
+      axios
+        .get('/api/classes')
+        .then(response => {
+           console.log(response)
+          if(response.status == 200){
+            if (response.data.success == false) {
+
+            }else{
+              if (response.data.message == 'Aucune classe n\'est enregistrée') {
+                this.message = response.data.message
+                this.infos = response.data
+              } else {
+                this.empty = 0
+                this.infos = response.data
+                console.log(response.data)
+              }
+            }
+          }
+      });
+    },
+  },
+
+  mounted() {
+      this.getResults();
+    }
+
 }
 </script>

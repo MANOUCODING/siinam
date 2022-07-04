@@ -15,11 +15,11 @@ class CreateDecisionConseilsTable extends Migration
     {
         Schema::create('decision_conseils', function (Blueprint $table) {
             $table->id();
-            $table->string('nomCycle');
+            $table->string('classe_id');
             $table->string('moyFaible');
             $table->string('moyFort');
             $table->string('decision');
-            $table->boolean('findeCycle')->default(0);
+            $table->string('statut')->default("Nouveau");
             $table->boolean('dejaRedoublerDansCycle')->default(0);
             $table->string('detailsDecision');
             $table->timestamps();

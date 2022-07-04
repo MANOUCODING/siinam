@@ -258,7 +258,7 @@ class ClasseTableSeeder extends Seeder
 
             [
                 'nomClasse' => 'Troisième',
-                'codeClasse' => '6ième',
+                'codeClasse' => '3ième',
                 'cycle' => 'Premier',
                 'section' => 'Collège',
                 'finDeCycle' => 1,

@@ -98,7 +98,7 @@
           <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
                   <h5 class="card-header">Liste des matières scientifiques</h5>
-                  <div class="card-body" v-if="!empty">
+                  <div class="card-body" v-if="empty == 0">
                       <table class="table table-bordered">
                           <thead>
                             <tr>
@@ -111,22 +111,37 @@
                                 <th scope="col">Actions</th>
                             </tr>
                           </thead>
-                          <tbody>
-                              <!-- <tr>
+                        <tbody v-for="info in infos.MatieresScientifiques" :key="info.id">
+                              <tr>
                                   <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                              </tr> -->
+                                  <td> {{ info.codeMatiere  }} </td>
+                                  <td> {{ info.nomMatiere  }}</td>
+                                  <td> {{ info.Categorie  }} </td>
+                                  <td> {{ info.OrdreBulletin  }} </td>
+                                  <td> {{ info.nbreAffectation  }} </td>
+                                  <td>
+                                    <div class="row" style="max-width: 100%" >
+                                        <div class="col-md-3">
+                                          <router-link to="#" class="btn btn-xs btn-rounded btn-info">
+                                            <i class="fa fa-eye"></i>
+                                          </router-link>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3">
+                                          <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteMatiere(info.id)"> <i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                  </td>
+                              </tr>
                           </tbody>
                       </table>
                   </div>
-                  <div class="card-body" v-else>
+                  <div class="card-body" v-else-if="empty == 1">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div style="position: relative; height: 400px;">
-                                <img src="/assets/admin/images/empty.png" style="width: 250px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                                <img src="/assets/admin/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
                             </div>
                             <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
                         </div>
@@ -152,7 +167,7 @@ export default {
   data() {
       return {
         infos: {},
-        empty : 1,
+        empty : null,
         message: "",
       }
   },
@@ -160,13 +175,14 @@ export default {
   methods: {
     getResults(){
       axios
-        .get('/api/matieres')
+        .get('/api/matieres/scientifiques')
         .then(response => {
           if(response.status == 200){
             if (response.data.success == false) {
 
             }else{
-              if (response.data.message == 'Aucune matière n\'est enregistrée') {
+              if (response.data.message == 'Aucune matière scientifique n\'est enregistrée') {
+                this.empty = 1
                 this.message = response.data.message
                 this.infos = response.data
                 console.log(this.message)
@@ -178,6 +194,44 @@ export default {
             }
           }
       });
+    },
+    deleteMatiere(id) {
+        this.$swal({
+            title: "Etes-vous sûr?",
+            text: "Vous ne pourrez plus récupérer cette matière !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "blue",
+            confirmButtonText: "Oui, supprimez-la!",
+            cancelButtonText: "Non, annuler !",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }).then((confirmed) => {
+           
+                axios
+                .delete(`/api/matieres/${id}`)
+                .then(response => {
+                    console.log(response.data)
+                    this.getResults();
+                      if (response.data.message == "La matière a été supprimée avec succès.") {
+                        this.$swal({
+                            title: "Succès!",
+                            text: response.data.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        this.$swal({
+                            title: "Erreur",
+                            text: response.data.message,
+                            icon: "error",
+                            timer: 1000
+                        });
+                    }
+                });
+            
+        });
     },
   },
 

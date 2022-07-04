@@ -43,16 +43,53 @@ Route::view('/enseignants/create', 'dashboard');
 
 Route::view('/settings/home', 'dashboard');
 
-Route::view('/settings/decisions/conseils', 'settings.conseils.conseils');
+Route::view('/settings/decisions/conseils', 'dashboard');
 
-Route::view('/settings/coordonnees', 'settings.coordonnees.coordonnees');
+Route::view('/settings/decisions/status', 'dashboard');
 
-Route::view('/settings/appreciations/matieres', 'settings.appreciationMatiere.appreciationmatiere');
+//Route pour les decisions conseils des nouveaux eleves
 
-Route::view('/settings/appreciations/semestres', 'settings.appreciationSemestre.appreciationsemestre');
+Route::view('/settings/decisions/nouveaux/colleges', 'dashboard');
 
-Route::view('/settings/users', 'settings.users.users');
+Route::view('/settings/decisions/nouveaux/lyceemoderne', 'dashboard');
 
-Route::view('/settings/users/create', 'settings.users.users');
+Route::view('/settings/decisions/nouveaux/lyceetechnique', 'dashboard');
 
-Route::view('/settings/annee-scolaire', 'settings.anneeScolaire.annee-scolaire');
+//Route pour les decisions conseils des eleves doublants
+
+Route::view('/settings/decisions/doublants/colleges', 'dashboard');
+
+Route::view('/settings/decisions/doublants/lyceemoderne', 'dashboard');
+
+Route::view('/settings/decisions/doublants/lyceetechnique', 'dashboard');
+
+
+//Route pour les decisions conseils des eleves triplants
+
+Route::view('/settings/decisions/triplants/colleges', 'dashboard');
+
+Route::view('/settings/decisions/triplants/lyceemoderne', 'dashboard');
+
+Route::view('/settings/decisions/triplants/lyceetechnique', 'dashboard');
+
+//Route pour les decisions conseils des eleves quadruplants
+
+Route::view('/settings/decisions/quadruplants/colleges', 'dashboard');
+
+Route::view('/settings/decisions/quadruplants/lyceemoderne', 'dashboard');
+
+Route::view('/settings/decisions/quadruplants/lyceetechnique', 'dashboard');
+
+
+
+Route::view('/settings/coordonnees', 'dashboard');
+
+Route::view('/settings/appreciations/matieres', 'dashboard');
+
+Route::view('/settings/appreciations/semestres', 'dashboard');
+
+Route::view('/settings/users', 'dashboard');
+
+Route::view('/settings/users/create', 'dashboard');
+
+Route::view('/settings/annee-scolaire', 'dashboard');

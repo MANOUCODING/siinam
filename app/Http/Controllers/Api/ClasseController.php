@@ -58,6 +58,111 @@ class ClasseController extends BaseController
         }
     }
 
+    public function college(){
+       
+
+       $classesCollege = Classe::where('section', 'Collège')->get();
+
+       $classesCollegeCount = Classe::where('section', 'Collège')->count();
+
+       $classesLyceeModerneCount = Classe::where('section', 'Lycée Moderne')->count();
+
+       $classesLyceeTechniqueCount = Classe::where('section', 'Lycée Technique')->count();
+
+        if ( $classesCollegeCount == 0) {
+
+            return response()->json([
+                'message' => 'Aucune classe du collège n\'est enregistrée',
+                'classesCollegeCount' => $classesCollegeCount,
+                'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+            ], 200);
+
+        } else {
+
+            return response()->json([
+                'message' => 'liste de toutes les classes',
+                'classesCollege' => $classesCollege,
+                'classesCollegeCount' => $classesCollegeCount,
+                'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+
+            ], 200);
+
+        }
+
+    }
+
+    public function lyceemoderne(){
+       
+
+        $classesLyceeModerne = Classe::where('section', 'Lycée Moderne')->get();
+ 
+        $classesCollegeCount = Classe::where('section', 'Collège')->count();
+ 
+        $classesLyceeModerneCount = Classe::where('section', 'Lycée Moderne')->count();
+ 
+        $classesLyceeTechniqueCount = Classe::where('section', 'Lycée Technique')->count();
+ 
+         if ( $classesLyceeModerneCount == 0) {
+ 
+             return response()->json([
+                 'message' => 'Aucune classe du lycée moderne n\'est enregistrée',
+                 'classesCollegeCount' => $classesCollegeCount,
+                 'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                 'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+             ], 200);
+ 
+         } else {
+ 
+             return response()->json([
+                 'message' => 'liste de toutes les classes',
+                 'classesLyceeModerne' => $classesLyceeModerne,
+                 'classesCollegeCount' => $classesCollegeCount,
+                 'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                 'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+ 
+             ], 200);
+ 
+         }
+ 
+     }
+
+     public function lyceetechnique(){
+       
+
+        $classesLyceeTechnique = Classe::where('section', 'Lycée Technique')->get();
+ 
+        $classesCollegeCount = Classe::where('section', 'Collège')->count();
+ 
+        $classesLyceeModerneCount = Classe::where('section', 'Lycée Moderne')->count();
+ 
+        $classesLyceeTechniqueCount = Classe::where('section', 'Lycée Technique')->count();
+ 
+         if ($classesLyceeTechniqueCount == 0) {
+ 
+             return response()->json([
+                 'message' => 'Aucune classe du lycée technique n\'est enregistrée',
+                 'classesCollegeCount' => $classesCollegeCount,
+                 'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                 'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+             ], 200);
+ 
+         } else {
+ 
+             return response()->json([
+                 'message' => 'liste de toutes les classes',
+                 'classesLyceeTechnique' => $classesLyceeTechnique,
+                 'classesCollegeCount' => $classesCollegeCount,
+                 'classesLyceeModerneCount' => $classesLyceeModerneCount,
+                 'classesLyceeTechniqueCount' => $classesLyceeTechniqueCount,
+ 
+             ], 200);
+ 
+         }
+ 
+     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -283,6 +388,6 @@ class ClasseController extends BaseController
     {
        $classe = Classe::findOrFail($id);
        $classe->delete();
-        return $this->sendResponse($classe, 'Les informations ont été supprimées avec succès.');
+        return $this->sendResponse($classe, 'la classe a été supprimée avec succès.');
     }
 }

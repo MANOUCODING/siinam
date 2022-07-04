@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classe;
 use App\Models\DecisionConseil;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -18,18 +19,335 @@ class DecisionConseilController extends BaseController
 
     public function index(){
 
+        $classes = Classe::all();
+
         $decisionConseils = DecisionConseil::all();
 
-        if (count($decisionConseils) == 0) {
+        if (count($classes) == 0) {
 
             return response()->json([
-                'message' => 'Aucune décision n\'est enregistrée',
+                'message' => 'Desolé nous ne trouvons aucune classe disponible',
             ], 200);
+           
+        } else {
+            if (count($decisionConseils) == 0) {
 
+                return response()->json([
+                    'message' => 'Aucune décision n\'est enregistrée',
+                ], 200);
+    
+            } else {
+    
+                return $this->sendResponse($decisionConseils, 'liste de toutes les decisions du conseil.');
+    
+            }
+        }
+    }
+
+
+    public function nouveaux(){
+
+        $classesCount = Classe::count();
+
+        if ($classesCount == 0) {
+
+            return response()->json([
+                'message' => 'Desolé nous ne trouvons aucune classe disponible',
+            ], 200);
+           
         } else {
 
-            return $this->sendResponse($decisionConseils, 'liste de toutes les decisions du conseil.');
+            $decisionConseilsCount = DecisionConseil::where('status', 'Nouveau')->count();
 
+            if ($decisionConseilsCount == 0) {
+
+                return response()->json([
+                    'message' => 'Aucune décision n\'est enregistrée',
+                ], 200);
+    
+            } else {
+
+                $infosCollege = [];
+
+                $infosLyceeModerne =  [];
+
+                $infosLyceeTechnique = [];
+
+                $classesCollege =  Classe::where('section', 'Collège')->get();
+
+                $classesLyceeModerne =  Classe::where('section', 'Lycée Moderne')->get();
+
+                $classesLyceeTechnique =  Classe::where('section', 'Lycée Technique')->get();
+
+                foreach ($classesCollege as $classe) {
+
+                    $infosCollege[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Nouveau')->count()
+                    ];
+                }
+
+                foreach ($classesLyceeModerne as $classe) {
+
+                    $infosLyceeModerne[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Nouveau')->count()
+                    ];
+                }
+
+                foreach ($classesLyceeTechnique as $classe) {
+
+                    $infosLyceeTechnique[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Nouveau')->count()
+                    ];
+                }
+    
+                return response()->json([
+                    'infosLyceeTechnique' => $infosLyceeTechnique,
+                    'infosCollege' => $infosCollege,
+                    'infosLyceeModerne' => $infosLyceeModerne
+                ], 200);
+    
+            }
+        }
+    }
+
+
+    public function doublants(){
+
+        $classesCount = Classe::count();
+
+        if ($classesCount == 0) {
+
+            return response()->json([
+                'message' => 'Desolé nous ne trouvons aucune classe disponible',
+            ], 200);
+           
+        } else {
+
+            $decisionConseilsCount = DecisionConseil::where('status', 'Doublant')->count();
+
+            if ($decisionConseilsCount == 0) {
+
+                return response()->json([
+                    'message' => 'Aucune décision n\'est enregistrée',
+                ], 200);
+    
+            } else {
+
+                $infosCollege = [];
+
+                $infosLyceeModerne =  [];
+
+                $infosLyceeTechnique = [];
+
+                $classesCollege =  Classe::where('section', 'Collège')->get();
+
+                $classesLyceeModerne =  Classe::where('section', 'Lycée Moderne')->get();
+
+                $classesLyceeTechnique =  Classe::where('section', 'Lycée Technique')->get();
+
+                foreach ($classesCollege as $classe) {
+
+                    $infosCollege[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Doublant')->count()
+
+                    ];
+                }
+
+                foreach ($classesLyceeModerne as $classe) {
+
+                    $infosLyceeModerne[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Doublant')->count()
+
+                    ];
+                }
+
+                foreach ($classesLyceeTechnique as $classe) {
+
+                    $infosLyceeTechnique[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Doublant')->count()
+
+                    ];
+                }
+    
+                return response()->json([
+                    'infosLyceeTechnique' => $infosLyceeTechnique,
+                    'infosCollege' => $infosCollege,
+                    'infosLyceeModerne' => $infosLyceeModerne
+                ], 200);
+    
+            }
+        }
+    }
+
+    public function triplants(){
+
+        $classesCount = Classe::count();
+
+        if ($classesCount == 0) {
+
+            return response()->json([
+                'message' => 'Desolé nous ne trouvons aucune classe disponible',
+            ], 200);
+           
+        } else {
+
+            $decisionConseilsCount = DecisionConseil::where('status', 'Triplant')->count();
+
+            if ($decisionConseilsCount == 0) {
+
+                return response()->json([
+                    'message' => 'Aucune décision n\'est enregistrée',
+                ], 200);
+    
+            } else {
+
+                $infosCollege = [];
+
+                $infosLyceeModerne =  [];
+
+                $infosLyceeTechnique = [];
+
+                $classesCollege =  Classe::where('section', 'Collège')->get();
+
+                $classesLyceeModerne =  Classe::where('section', 'Lycée Moderne')->get();
+
+                $classesLyceeTechnique =  Classe::where('section', 'Lycée Technique')->get();
+
+                foreach ($classesCollege as $classe) {
+
+                    $infosCollege[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Triplant')->count()
+
+                    ];
+                }
+
+                foreach ($classesLyceeModerne as $classe) {
+
+                    $infosLyceeModerne[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Triplant')->count()
+
+                    ];
+                }
+
+                foreach ($classesLyceeTechnique as $classe) {
+
+                    $infosLyceeTechnique[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Triplant')->count()
+
+                    ];
+                }
+    
+                return response()->json([
+                    'infosLyceeTechnique' => $infosLyceeTechnique,
+                    'infosCollege' => $infosCollege,
+                    'infosLyceeModerne' => $infosLyceeModerne
+                ], 200);
+    
+            }
+        }
+    }
+
+    public function quadruplants(){
+
+        $classesCount = Classe::count();
+
+        if ($classesCount == 0) {
+
+            return response()->json([
+                'message' => 'Desolé nous ne trouvons aucune classe disponible',
+            ], 200);
+           
+        } else {
+
+            $decisionConseilsCount = DecisionConseil::where('status', 'Quadruplant')->count();
+
+            if ($decisionConseilsCount == 0) {
+
+                return response()->json([
+                    'message' => 'Aucune décision n\'est enregistrée',
+                ], 200);
+    
+            } else {
+
+                $infosCollege = [];
+
+                $infosLyceeModerne =  [];
+
+                $infosLyceeTechnique = [];
+
+                $classesCollege =  Classe::where('section', 'Collège')->get();
+
+                $classesLyceeModerne =  Classe::where('section', 'Lycée Moderne')->get();
+
+                $classesLyceeTechnique =  Classe::where('section', 'Lycée Technique')->get();
+
+                foreach ($classesCollege as $classe) {
+
+                    $infosCollege[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Quadruplant')->count()
+
+                    ];
+                }
+
+                foreach ($classesLyceeModerne as $classe) {
+
+                    $infosLyceeModerne[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Quadruplant')->count()
+
+                    ];
+                }
+
+                foreach ($classesLyceeTechnique as $classe) {
+
+                    $infosLyceeTechnique[] = [
+                        'id' => $classe->id,
+                        'code' => $classe->codeClasse,
+                        'niveau' => $classe->nomClasse,
+                        'nbreDecision' => DecisionConseil::where('classe_id', $classe->id)->where('status', 'Quadruplant')->count()
+
+                    ];
+                }
+    
+                return response()->json([
+                    'infosLyceeTechnique' => $infosLyceeTechnique,
+                    'infosCollege' => $infosCollege,
+                    'infosLyceeModerne' => $infosLyceeModerne
+                ], 200);
+    
+            }
         }
     }
 
@@ -44,7 +362,6 @@ class DecisionConseilController extends BaseController
         return response()->json([
             'message' => 'Formulaire d\'enregistrement',
             'decisionConseils' => [
-                'nomCycle' => 'First',
                 'moyFaible' => 0,
                 'moyFort' => 0,
                 'decision' => '',

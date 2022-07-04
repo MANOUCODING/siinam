@@ -45,7 +45,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div style="position: relative; height: 500px;">
-                    <img src="/assets/admin/images/empty.png" style="width: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                    <img src="/assets/admin/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
                 </div>
                 <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
             </div>
@@ -65,7 +65,7 @@ export default {
 
   data() {
       return {
-        coordonnes: {},
+        infos: {},
         empty : 1,
         message: "",
       }
@@ -74,18 +74,19 @@ export default {
   methods: {
     getResults(){
       axios
-        .get('/api/settings/appreciations/matieres')
+        .get('/api/matieres')
         .then(response => {
-           console.log(response)
           if(response.status == 200){
             if (response.data.success == false) {
 
             }else{
-              if (response.data.message == 'Aucune appréciation par matière n\'est enregistrée') {
+              if (response.data.message == 'Aucune matière n\'est enregistrée') {
                 this.message = response.data.message
+                this.infos = response.data
+                console.log(this.message)
               } else {
                 this.empty = 0
-                this.coordonnes = response.data.school
+                this.infos = response.data
                 console.log(response.data)
               }
             }

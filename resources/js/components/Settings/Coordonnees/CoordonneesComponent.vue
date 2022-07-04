@@ -88,7 +88,7 @@
               <div class="col-md-3"></div>
               <div class="col-md-6">
                 <div style="position: relative; height: 500px;">
-                    <img src="/assets/admin/images/empty.png" style="width: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                    <img src="/assets/admin/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
                 </div>
                 <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
               </div>

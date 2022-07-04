@@ -23,7 +23,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/settings/decisions/conseils"><span class="icon"><i class="fas fa-fw  fa-envelope"></i></span>
+                        <router-link to="/settings/decisions/status"><span class="icon"><i class="fas fa-fw  fa-envelope"></i></span>
                             Décision du conseil
                         </router-link>
                     </li>

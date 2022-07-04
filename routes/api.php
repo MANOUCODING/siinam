@@ -122,6 +122,12 @@ Route::delete('/settings/coordonnees/{id}', [SchoolController::class, 'destroy']
 
 Route::get('/classes', [ClasseController::class, 'index']);
 
+Route::get('/classes/college', [ClasseController::class, 'college']);
+
+Route::get('/classes/lyceemoderne', [ClasseController::class, 'lyceemoderne']);
+
+Route::get('/classes/lyceetechnique', [ClasseController::class, 'lyceetechnique']);
+
 Route::get('/classes/create', [ClasseController::class, 'create']);
 
 Route::get('/classes/{id}/edit', [ClasseController::class, 'edit']);
@@ -135,6 +141,12 @@ Route::delete('/classes/{id}', [ClasseController::class, 'destroy']);
 // Gestion des matieres
 
 Route::get('/matieres', [MatiereController::class, 'index']);
+
+Route::get('/matieres/scientifiques', [MatiereController::class, 'matieresScientifiques']);
+
+Route::get('/matieres/litteraires', [MatiereController::class, 'matieresLitteraires']);
+
+Route::get('/matieres/facultatives', [MatiereController::class, 'matieresFacultatives']);
 
 Route::get('/matieres/create', [MatiereController::class, 'create']);
 

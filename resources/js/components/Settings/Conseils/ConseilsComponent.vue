@@ -7,15 +7,12 @@
           <div class="email-head-subject">
               <div class="title"><a class="active" href="#"><span class="icon"><i class="fas fa-2x fa-cog"></i></span></a>   <span>Decision du conseil</span>
                   <div class="icons">
-                    <a href="#" class="btn btn-lg btn-primary btn-block icon" data-toggle="modal" data-target="#modalCreateConseils" style="color: #fff">
+                    <router-link to="/settings/decisions/conseils/create" class="btn btn-lg btn-primary btn-block icon" style="color: #fff">
                       <i class="fas fa-plus"></i> &nbsp; &nbsp; Ajouter
-                    </a>
+                    </router-link>
                   </div>
               </div>
           </div>
-
-          <modalCreatecConseils></modalCreatecConseils>
-
       </div>
       <div class="email-body">
 
@@ -55,7 +52,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div style="position: relative; height: 500px;">
-                    <img src="/assets/admin/images/empty.png" style="width: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                    <img src="/assets/admin/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
                 </div>
                 <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
             </div>
@@ -92,7 +89,7 @@ export default {
             if (response.data.success == false) {
 
             }else{
-              if (response.data.message == 'Aucune décision n\'est enregistrée') {
+              if (response.data.message == 'Desolé nous ne trouvons aucune classe disponible') {
                 this.message = response.data.message
               } else {
                 this.empty = 0

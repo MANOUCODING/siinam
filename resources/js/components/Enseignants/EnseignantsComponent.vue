@@ -33,7 +33,7 @@
                    <div>
                         <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"CreateEnseignantComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-plus"></i>Ajouter un enseignant</router-link>
                     </div>
-                  <div class="card-body"  v-if="empty == 0">
+                  <div class="card-body"  v-if="!empty">
                       <table class="table table-bordered">
                           <thead>
                             <tr>
@@ -62,7 +62,7 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div style="position: relative; height: 400px;">
-                                <img src="/assets/admin/images/empty.png" style="width: 250px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                                <img src="/assets/admin/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
                             </div>
                             <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
                         </div>
@@ -88,7 +88,7 @@ export default {
   data() {
       return {
         infos: {},
-        empty : '',
+        empty : 1,
         message: "",
       }
   },

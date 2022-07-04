@@ -56,6 +56,104 @@ class MatiereController extends BaseController
         }
     }
 
+    public function matieresScientifiques(){
+
+        $MatieresScientifiques = Matiere::where('Categorie', 'Matières Scientifiques')->get();
+
+        $MatieresScientifiquesCount = Matiere::where('Categorie', 'Matières Scientifiques')->count();
+
+        $MatieresLitterairesCount = Matiere::where('Categorie', 'Matières Littéraires')->count();
+
+        $MatieresFacultativesCount = Matiere::where('Categorie', 'Matières Facultatives')->count();
+
+        if ($MatieresScientifiquesCount == 0) {
+
+            return response()->json([
+                'message' => 'Aucune matière scientifique n\'est enregistrée',
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+            ], 200);
+
+        } else {
+
+            return response()->json([
+                'message' => 'liste de toutes les matières ',
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+                'MatieresScientifiques' =>  $MatieresScientifiques,
+            ], 200);
+
+        }
+    }
+
+
+    public function matieresLitteraires(){
+
+        $MatieresScientifiques = Matiere::where('Categorie', 'Matières Littéraires')->get();
+
+        $MatieresScientifiquesCount = Matiere::where('Categorie', 'Matières Scientifiques')->count();
+
+        $MatieresLitterairesCount = Matiere::where('Categorie', 'Matières Littéraires')->count();
+
+        $MatieresFacultativesCount = Matiere::where('Categorie', 'Matières Facultatives')->count();
+
+        if ($MatieresLitterairesCount == 0) {
+
+            return response()->json([
+                'message' => 'Aucune matière littéraire n\'est enregistrée',
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+            ], 200);
+
+        } else {
+
+            return response()->json([
+                'message' => 'liste de toutes les matières',
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+                'MatieresScientifiques' =>  $MatieresScientifiques,
+            ], 200);
+
+        }
+    }
+
+    public function matieresFacultatives(){
+
+        $MatieresScientifiques = Matiere::where('Categorie', 'Matières Facultatives')->get();
+
+        $MatieresScientifiquesCount = Matiere::where('Categorie', 'Matières Scientifiques')->count();
+
+        $MatieresLitterairesCount = Matiere::where('Categorie', 'Matières Littéraires')->count();
+
+        $MatieresFacultativesCount = Matiere::where('Categorie', 'Matières Facultatives')->count();
+
+        if ( $MatieresFacultativesCount == 0) {
+
+            return response()->json([
+                'message' => 'Aucune matière facultative n\'est enregistrée',
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+            ], 200);
+
+        } else {
+
+            return response()->json([
+                'message' => 'liste de toutes les matières',
+                'MatieresScientifiquesCount' =>  $MatieresScientifiquesCount,
+                'MatieresLitterairesCount' => $MatieresLitterairesCount,
+                'MatieresFacultativesCount' => $MatieresFacultativesCount,
+                'MatieresScientifiques' =>  $MatieresScientifiques,
+            ], 200);
+
+        }
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -166,7 +264,7 @@ class MatiereController extends BaseController
     {
         $matiere = Matiere::findOrFail($id);
         $matiere->delete();
-        return $this->sendResponse($matiere, 'La matière été supprimée avec succès.');
+        return $this->sendResponse($matiere, 'La matière a été supprimée avec succès.');
     }
 
 }

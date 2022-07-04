@@ -37,7 +37,42 @@ import SettingsAppreciationMatiereComponent from '../components/Settings/Appreci
 
 import SettingsAppreciationSemestreComponent from '../components/Settings/AppreciationSemestre/AppreciationSemestreComponent.vue'
 
-import SettingsConseilsComponent from '../components/Settings/Conseils/ConseilsComponent.vue';
+//Parametres gestion des decisions du conseils
+
+import SettingsStatutConseilsComponent from '../components/Settings/Conseils/StatutConseilsComponent.vue';
+
+//Parametres gestion des decisions du conseils pour les eleves nouveaux
+
+import SettingsStatutConseilsNouveauxCollegeComponent from '../components/Settings/Conseils/partials/Nouveau/Colleges/CollegeComponent.vue';
+
+import SettingsStatutConseilsNouveauxLyceeModerneComponent from '../components/Settings/Conseils/partials/Nouveau/LyceeModerne/LyceeModerneComponent.vue';
+
+import SettingsStatutConseilsNouveauxLyceeTechniqueComponent from '../components/Settings/Conseils/partials/Nouveau/LyceeTechnique/LyceeTechniqueComponent.vue';
+
+//Parametres gestion des decisions du conseils pour les eleves triplants
+
+import SettingsStatutConseilsTriplantsCollegeComponent from '../components/Settings/Conseils/partials/Triplant/Colleges/CollegeComponent.vue';
+
+import SettingsStatutConseilsTriplantsLyceeModerneComponent from '../components/Settings/Conseils/partials/Triplant/LyceeModerne/LyceeModerneComponent.vue';
+
+import SettingsStatutConseilsTriplantsLyceeTechniqueComponent from '../components/Settings/Conseils/partials/Triplant/LyceeTechnique/LyceeTechniqueComponent.vue';
+
+//Parametres gestion des decisions du conseils pour les eleves doublants
+
+import SettingsStatutConseilsDoublantsCollegeComponent from '../components/Settings/Conseils/partials/Doublant/Colleges/CollegeComponent.vue';
+
+import SettingsStatutConseilsDoublantsLyceeModerneComponent from '../components/Settings/Conseils/partials/Doublant/LyceeModerne/LyceeModerneComponent.vue';
+
+import SettingsStatutConseilsDoublantsLyceeTechniqueComponent from '../components/Settings/Conseils/partials/Doublant/LyceeTechnique/LyceeTechniqueComponent.vue';
+
+
+//Parametres gestion des decisions du conseils pour les eleves quadruplants
+
+import SettingsStatutConseilsQuadruplantsCollegeComponent from '../components/Settings/Conseils/partials/Quadruplant/Colleges/CollegeComponent.vue';
+
+import SettingsStatutConseilsQuadruplantsLyceeModerneComponent from '../components/Settings/Conseils/partials/Quadruplant/LyceeModerne/LyceeModerneComponent.vue';
+
+import SettingsStatutConseilsQuadruplantsLyceeTechniqueComponent from '../components/Settings/Conseils/partials/Quadruplant/LyceeTechnique/LyceeTechniqueComponent.vue';
 
 import SettingsCoordonneesComponent from '../components/Settings/Coordonnees/CoordonneesComponent.vue';
 
@@ -141,11 +176,95 @@ const routes = [
   }, 
 
   //Décision du conseil de fin d'année
+
   {
-    path: '/settings/decisions/conseils',
-    component: SettingsConseilsComponent,
-    name: 'settings.conseils'
+    path: '/settings/decisions/status',
+    component: SettingsStatutConseilsComponent,
+    name: 'SettingsStatutConseilsComponent'
   }, 
+
+  //Decision du conseils pour les nouveaux eleves
+
+  {
+    path: '/settings/decisions/nouveaux/colleges',
+    component: SettingsStatutConseilsNouveauxCollegeComponent,
+    name: 'SettingsStatutConseilsNouveauxCollegeComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/nouveaux/lyceemoderne',
+    component: SettingsStatutConseilsNouveauxLyceeModerneComponent,
+    name: 'SettingsStatutConseilsNouveauxLyceeModerneComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/nouveaux/lyceetechnique',
+    component: SettingsStatutConseilsNouveauxLyceeTechniqueComponent,
+    name: 'SettingsStatutConseilsNouveauxLyceeTechniqueComponent'
+  }, 
+
+  //Decision du conseils pour les eleves doublants
+
+  {
+    path: '/settings/decisions/doublants/colleges',
+    component: SettingsStatutConseilsDoublantsCollegeComponent,
+    name: 'SettingsStatutConseilsDoublantsCollegeComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/doublants/lyceemoderne',
+    component: SettingsStatutConseilsDoublantsLyceeModerneComponent,
+    name: 'SettingsStatutConseilsDoublantsLyceeModerneComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/doublants/lyceetechnique',
+    component: SettingsStatutConseilsDoublantsLyceeTechniqueComponent,
+    name: 'SettingsStatutConseilsDoublantsLyceeTechniqueComponent'
+  }, 
+
+  //Decision du conseils pour les eleves triplants
+
+  {
+    path: '/settings/decisions/triplants/colleges',
+    component: SettingsStatutConseilsTriplantsCollegeComponent,
+    name: 'SettingsStatutConseilsTriplantsCollegeComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/triplants/lyceemoderne',
+    component: SettingsStatutConseilsTriplantsLyceeModerneComponent,
+    name: 'SettingsStatutConseilsTriplantsLyceeModerneComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/triplants/lyceetechnique',
+    component: SettingsStatutConseilsTriplantsLyceeTechniqueComponent,
+    name: 'SettingsStatutConseilsTriplantsLyceeTechniqueComponent'
+  }, 
+
+
+  //Decision du conseils pour les eleves quadruplants
+
+  {
+    path: '/settings/decisions/quadruplants/colleges',
+    component: SettingsStatutConseilsQuadruplantsCollegeComponent,
+    name: 'SettingsStatutConseilsQuadruplantsCollegeComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/quadruplants/lyceemoderne',
+    component: SettingsStatutConseilsQuadruplantsLyceeModerneComponent,
+    name: 'SettingsStatutConseilsQuadruplantsLyceeModerneComponent'
+  }, 
+
+  {
+    path: '/settings/decisions/quadruplants/lyceetechnique',
+    component:  SettingsStatutConseilsQuadruplantsLyceeTechniqueComponent,
+    name: ' SettingsStatutConseilsQuadruplantsLyceeTechniqueComponent'
+  }, 
+
+  
   
   //Coordonnées de l'établissement
   {
