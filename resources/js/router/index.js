@@ -35,6 +35,10 @@ import SettingsHomeComponent from '../components/Settings/HomeComponent.vue';
 
 import SettingsAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/AppreciationMatiereComponent.vue';
 
+import SettingsCreateAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/CreateAppreciationMatiereComponent.vue';
+
+import SettingsUpdateAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/UpdateAppreciationMatiereComponent.vue';
+
 import SettingsAppreciationSemestreComponent from '../components/Settings/AppreciationSemestre/AppreciationSemestreComponent.vue'
 
 //Parametres gestion des decisions du conseils
@@ -76,7 +80,11 @@ import SettingsStatutConseilsQuadruplantsLyceeTechniqueComponent from '../compon
 
 import SettingsCoordonneesComponent from '../components/Settings/Coordonnees/CoordonneesComponent.vue';
 
+import SettingsUpdateCoordonneesComponent from '../components/Settings/Coordonnees/UpdateCoordonneesComponent.vue';
+
 import SettingsAnneeScolaireComponent from '../components/Settings/AnneeScolaire/AnneeScolaireComponent.vue';
+
+import SettingsCreateAnneeScolaireComponent from '../components/Settings/AnneeScolaire/CreateAnneeScolaireComponent.vue';
 
 import SettingsUsersComponent from '../components/Settings/Users/UsersComponent.vue';
 
@@ -273,11 +281,29 @@ const routes = [
     name: 'settings.coordonnees'
   }, 
 
+  {
+    path: '/settings/coordonnees/edit',
+    component: SettingsUpdateCoordonneesComponent,
+    name: 'settings.coordonnees.update'
+  }, 
+
   //Appreciation par matière
   {
     path: '/settings/appreciations/matieres',
     component: SettingsAppreciationMatiereComponent,
     name: 'settings.appreciations.matieres'
+  }, 
+
+  {
+    path: '/settings/appreciations/matieres/create',
+    component: SettingsCreateAppreciationMatiereComponent,
+    name: 'settings.appreciations.matieres.create'
+  }, 
+
+  {
+    path: '/settings/appreciations/matieres/:id/edit',
+    component: SettingsUpdateAppreciationMatiereComponent,
+    name: 'settings.appreciations.matieres.update'
   }, 
 
   //Appreciation par semestre
@@ -292,6 +318,13 @@ const routes = [
     path: '/settings/annee-scolaire',
     component:  SettingsAnneeScolaireComponent,
     name: 'settings.annee-scolaire'
+  }, 
+
+    //Creer une rentrée scolaire
+  {
+    path: '/settings/annee-scolaire/create',
+    component:  SettingsCreateAnneeScolaireComponent,
+    name: 'settings.annee-scolaire.create'
   }, 
 
   //Appreciation par semestre

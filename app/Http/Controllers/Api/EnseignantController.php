@@ -18,9 +18,9 @@ class EnseignantController extends BaseController
      */
     public function index()
     {
-        $enseignants = Enseignant::count();
+        $enseignantsCount = Enseignant::count();
 
-        if ($enseignants == 0) {
+        if ($enseignantsCount == 0) {
 
             return response()->json([
                 'message' => 'Aucun enseignant n\'est enregistrée',
@@ -28,6 +28,8 @@ class EnseignantController extends BaseController
             ], 200);
 
         } else {
+
+            $enseignants = Enseignant::all();
 
             return response()->json([
                 'message' => 'liste de toutes les enseignants',
@@ -165,6 +167,8 @@ class EnseignantController extends BaseController
      */
     public function destroy($id)
     {
-        //
+       $enseignant = Enseignant::findOrFail($id);
+       $enseignant->delete();
+        return $this->sendResponse($enseignant, "L' enseignant  a été supprimée avec succès.");
     }
 }

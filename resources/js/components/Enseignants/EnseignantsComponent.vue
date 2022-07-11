@@ -33,31 +33,52 @@
                    <div>
                         <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"CreateEnseignantComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-plus"></i>Ajouter un enseignant</router-link>
                     </div>
-                  <div class="card-body"  v-if="!empty">
+                  <div class="card-body"  v-if="empty == 0">
                       <table class="table table-bordered">
                           <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Code</th>
                                 <th scope="col">Nom Complet</th>
                                 <th scope="col">Telephone</th>
                                 <th scope="col">email</th>
                                 <th scope="col">Adresse</th>
+                                <th scope="col">Sexe</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
                             </tr>
                           </thead>
-                          <tbody>
-                              <!-- <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                              </tr> -->
-                          </tbody>
+                            <tbody v-for="info in infos.enseignants" :key="info.id">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td> {{ info.nom  }} {{ info.prenoms  }} </td>
+                                    <td> {{ info.telephone }}</td>
+                                    <td> {{ info.email  }} </td>
+                                    <td> {{ info.adresse  }} </td>
+                                    <td> {{ info.sexe  }} </td>
+                                    <td>  <button type="button" v-if="info.status" class="btn btn-xs btn-rounded btn-primary">Actif</button>
+                                     <button type="button" v-else class="btn btn-xs btn-rounded btn-secondary">Inactif</button>  </td>
+                                    <td>
+                                      <div class="row" style="max-width: 100%" >
+                                          <div class="col-md-3">
+                                            <router-link to="#" class="btn btn-xs btn-rounded btn-info">
+                                              <i class="fa fa-eye"></i>
+                                            </router-link>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <router-link to="#" class="btn btn-xs btn-rounded btn-primary">
+                                              <i class="fa fa-edit"></i>
+                                            </router-link>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteEnseignant(info.id)"> <i class="fa fa-trash"></i></button>
+                                          </div>
+                                      </div>
+                                    </td>
+                                </tr>
+                            </tbody>
                       </table>
                   </div>
-                  <div class="card-body" v-else>
+                  <div class="card-body" v-else-if="empty == 1">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
@@ -88,7 +109,7 @@ export default {
   data() {
       return {
         infos: {},
-        empty : 1,
+        empty : null,
         message: "",
       }
   },
@@ -114,6 +135,45 @@ export default {
             }
           }
       });
+    },
+
+    deleteEnseignant(id) {
+        this.$swal({
+            title: "Etes-vous sûr?",
+            text: "Vous ne pourrez plus récupérer cet Enseignant!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "blue",
+            confirmButtonText: "Oui, supprimez!",
+            cancelButtonText: "Non, annuler !",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }).then((confirmed) => {
+              if (confirmed.isConfirmed) {
+                axios
+                .delete(`/api/enseignants/${id}`)
+                .then(response => {
+                    console.log(response.data)
+                    this.getResults();
+                      if (response.data.message == "L' enseignant  a été supprimée avec succès.") {
+                        this.$swal({
+                            title: "Succès!",
+                            text: response.data.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        this.$swal({
+                            title: "Erreur",
+                            text: response.data.message,
+                            icon: "error",
+                            timer: 1000
+                        });
+                    }
+                });
+              }
+        });
     },
   },
 

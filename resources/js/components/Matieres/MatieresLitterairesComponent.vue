@@ -113,7 +113,7 @@
                           </thead>
                         <tbody v-for="info in infos.MatieresScientifiques" :key="info.id">
                               <tr>
-                                  <th scope="row">1</th>
+                                  <th scope="row">{{ info.id  }}</th>
                                   <td> {{ info.codeMatiere  }} </td>
                                   <td> {{ info.nomMatiere  }}</td>
                                   <td> {{ info.Categorie  }} </td>
@@ -207,7 +207,7 @@ export default {
             closeOnConfirm: true,
             closeOnCancel: true
         }).then((confirmed) => {
-           
+               if (confirmed.isConfirmed) {
                 axios
                 .delete(`/api/matieres/${id}`)
                 .then(response => {
@@ -216,7 +216,7 @@ export default {
                       if (response.data.message == "La matière a été supprimée avec succès.") {
                         this.$swal({
                             title: "Succès!",
-                            text: response.data.message,
+                            text:  response.data.message,
                             icon: "success",
                             timer: 1000,
                             showConfirmButton: false
@@ -224,12 +224,14 @@ export default {
                     } else {
                         this.$swal({
                             title: "Erreur",
-                            text: response.data.message,
+                            text:  response.data.message,
                             icon: "error",
                             timer: 1000
                         });
                     }
                 });
+
+               }
             
         });
     },

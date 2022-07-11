@@ -84,7 +84,13 @@ Route::view('/settings/decisions/quadruplants/lyceetechnique', 'dashboard');
 
 Route::view('/settings/coordonnees', 'dashboard');
 
+Route::view('/settings/coordonnees/edit', 'dashboard');
+
 Route::view('/settings/appreciations/matieres', 'dashboard');
+
+Route::view('/settings/appreciations/matieres/{id}/edit', 'dashboard');
+
+Route::view('/settings/appreciations/matieres/create', 'dashboard');
 
 Route::view('/settings/appreciations/semestres', 'dashboard');
 
@@ -93,3 +99,5 @@ Route::view('/settings/users', 'dashboard');
 Route::view('/settings/users/create', 'dashboard');
 
 Route::view('/settings/annee-scolaire', 'dashboard');
+
+Route::view('/settings/annee-scolaire/create', 'dashboard');

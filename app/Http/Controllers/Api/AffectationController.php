@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnneeScolaire;
+use App\Models\Classe;
+use App\Models\Enseignant;
+use App\Models\Matiere;
 use Illuminate\Http\Request;
 
-class AffectationController extends Controller
+class AffectationController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,43 @@ class AffectationController extends Controller
      */
     public function index()
     {
-        //
+        $classes = Classe::count();
+
+        if ($classes == 0) {
+
+            return response()->json(['message' => 'Aucune classe n\'est enregistrée'], 200);
+
+        } else {
+            
+            $enseignants = Enseignant::count();
+
+            if ($enseignants == 0) {
+
+                return response()->json(['message' => 'Aucun enseignant n\'est enregistré'], 200);
+            } else {
+
+                $matieres = Matiere::count();
+
+                if ($matieres == 0) {
+    
+                    return response()->json(['message' => 'Aucune matiere n\'est enregistrée'], 200);
+
+                } else {
+                   
+                    $anneeScolaires = AnneeScolaire::count();
+
+                    if ($anneeScolaires == 0) {
+    
+                        return response()->json(['message' => 'Aucune matiere n\'est enregistrée'], 200);
+    
+                    }else{
+
+                    }
+
+                }
+            }
+
+        }
     }
 
     /**

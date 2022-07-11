@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppreciationSemestresTable extends Migration
+class CreateAffectationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateAppreciationSemestresTable extends Migration
      */
     public function up()
     {
-        Schema::create('appreciation_semestres', function (Blueprint $table) {
+        Schema::create('affectations', function (Blueprint $table) {
             $table->id();
-            $table->string('moyFaible');
-            $table->string('moyFort');
-            $table->string('niveau');
-            $table->string('section');
-            $table->string('appreciation');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateAppreciationSemestresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appreciation_semestres');
+        Schema::dropIfExists('affectations');
     }
 }

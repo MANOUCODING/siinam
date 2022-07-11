@@ -69,7 +69,7 @@
                     <button  v-if="loadingSave" class="btn  btn-primary"  type="button">
                         Enregistrement en cours ....
                     </button>
-                    <button type="submit" v-if="!loadingSave" class="btn btn-primary" @click.prevent="create">
+                    <button type="submit" v-if="!loadingSave" class="btn btn-primary" @click.prevent="update(data.id)">
                       Enregistrez
                     </button>
                     
@@ -109,10 +109,29 @@ export default {
   },
 
   methods: {
+
+    getResults(){
+      axios
+        .get(`/api/settings/appreciations/matieres/${this.$route.params.id}/edit`)
+        .then(response => {
+          if(response.status == 200){
+            if (response.data.success == false) {
+              if (response.data.message == 'Aucune Information trouvée.') {
+                this.message = response.data.message
+              }
+            }else{
+              this.data = response.data[0]
+              this.data.moyFaible = parseInt(this.data.moyFaible, 10);
+              this.data.moyFort = parseInt(this.data.moyFort, 10);
+              console.log(this.data)
+            }
+        }
+      });
+    },
    
-    create(){
+    update(id){
       this.loadingSave = true
-      axios.post('/api/settings/appreciations/matieres/store', this.data)
+      axios.put(`/api/settings/appreciations/matieres/${id}/update`, this.data)
       .then(response => {
           if (response.data.success == true) {
           this.loadingSave = false
@@ -144,8 +163,8 @@ export default {
   },
 
   mounted() {
-      
-    }
+    this.getResults()
+  }
 
 }
 </script>

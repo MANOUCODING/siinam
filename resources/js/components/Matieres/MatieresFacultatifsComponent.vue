@@ -207,7 +207,7 @@ export default {
             closeOnConfirm: true,
             closeOnCancel: true
         }).then((confirmed) => {
-           
+            if (confirmed.isConfirmed) {
                 axios
                 .delete(`/api/matieres/${id}`)
                 .then(response => {
@@ -216,7 +216,7 @@ export default {
                       if (response.data.message == "La matière a été supprimée avec succès.") {
                         this.$swal({
                             title: "Succès!",
-                            text: response.data.message,
+                            text:  response.data.message,
                             icon: "success",
                             timer: 1000,
                             showConfirmButton: false
@@ -224,12 +224,13 @@ export default {
                     } else {
                         this.$swal({
                             title: "Erreur",
-                            text: response.data.message,
+                            text:  response.data.message,
                             icon: "error",
                             timer: 1000
                         });
                     }
                 });
+            }
             
         });
     },

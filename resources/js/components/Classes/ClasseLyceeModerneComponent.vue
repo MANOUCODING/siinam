@@ -215,7 +215,7 @@ export default {
             closeOnConfirm: true,
             closeOnCancel: true
         }).then((confirmed) => {
-           
+           if (confirmed.isConfirmed) {
                 axios
                 .delete(`/api/classes/${id}`)
                 .then(response => {
@@ -238,7 +238,7 @@ export default {
                         });
                     }
                 });
-            
+           }
         });
     },
   },

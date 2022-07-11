@@ -67,33 +67,43 @@ class AnneeScolaireController extends BaseController
 
         $datas = $request->all();
         $validator = Validator::make($datas, [
-            'dateDebut' => 'required|date_format:d/m/Y',
-            'dateFin' => 'required|date_format:d/m/Y',
+            'dateDebut' => 'required',
+            'dateFin' => 'required',
             'TypePeriode' => 'required|string',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return $this->sendError("Erreur de validation", $validator->errors());
         }
 
         if($datas['dateDebut'] < $datas['dateFin'] ){
 
-            $dateDebut = date_parse($datas['dateDebut']);
+            $anneeScolaireMoment = AnneeScolaire::where('status', 'Inactif')->count();
+            
+            if ($anneeScolaireMoment == 1) {
 
-            $dateFin = date_parse($datas['dateFin']);
+                return $this->sendError('Ooops Desolé. Il ne peut pas avoir de rentrées scolaires inactives');
 
-            $anneeDebut = $dateDebut['year'];
+            } else {
 
-            $anneeFin = $dateFin['year'];
+                $dateDebut = date_parse($datas['dateDebut']);
 
-            $datas['anneeScolaire'] = $anneeDebut.'-'.$anneeFin ;
+                $dateFin = date_parse($datas['dateFin']);
 
-            $anneeScolaire = AnneeScolaire::create($datas);
+                $anneeDebut = $dateDebut['year'];
 
-            return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scoalire a été enregistre avec succès.');
+                $anneeFin = $dateFin['year'];
+
+                $datas['anneeScolaire'] = $anneeDebut.'-'.$anneeFin ;
+
+                $anneeScolaire = AnneeScolaire::create($datas);
+
+                return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scolaire a été enregistrée avec succès.');
+
+            }
 
         }else{
-            return $this->sendError('Ooops Desolé. La date de fin est anterieure à la date du debut');
+            return $this->sendError('Ooops Desolé. La date de fin est antérieure à la date du debut');
         }
     }
 
@@ -159,7 +169,9 @@ class AnneeScolaireController extends BaseController
             return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scoalire a été modifiée avec succès.');
 
         }else{
+
             return $this->sendError('Ooops Desolé. La date de fin est anterieure à la date du debut');
+
         }
     }
 
@@ -173,11 +185,15 @@ class AnneeScolaireController extends BaseController
     public function active(Request $request, $id)
     {
 
-        $anneeScolaireMoment = AnneeScolaire::where('status', 'En Cours')->get();
+        $anneeScolaireMomentCount = AnneeScolaire::where('status', 'En Cours')->count();
 
-        if (count($anneeScolaireMoment) == 1) {
+        if ($anneeScolaireMomentCount) {
+
+            $anneeScolaireMoment = AnneeScolaire::where('status', 'En Cours')->first();
 
             $anneeScolaireMoment->status = "Terminée";
+
+            $anneeScolaireMoment->update();
 
             $anneeScolaire = AnneeScolaire::findOrFail($id);
 

@@ -84,7 +84,7 @@ class SchoolController extends BaseController
 
         if($validator->fails()){
 
-            return response()->json($validator->errors()->toJson(), 400);
+            return  $this->sendError( 'Erreur de validation' , $validator->errors());
 
         }
         
@@ -100,15 +100,15 @@ class SchoolController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
 
         try {
-            $school = School::findOrFail($id);
+            $school = School::findOrFail(1);
 
 
 
-            return response()->json([$school]);
+            return $this->sendResponse(['school' => $school], 'Informations de l\'ecole sélectionnée.');
 
         } catch (ModelNotFoundException $modelNotFoundException){
 
@@ -125,7 +125,7 @@ class SchoolController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $datas = $request->all();
         $validator = Validator::make($datas, [
@@ -138,9 +138,9 @@ class SchoolController extends BaseController
             'nomIESEG' => 'required|string',
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return  $this->sendError( 'Erreur de validation' , $validator->errors());
         }
-        $school = School::findOrFail($id);
+        $school = School::findOrFail(1);
 
         $school->update($datas);
 

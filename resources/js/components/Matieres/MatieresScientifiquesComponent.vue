@@ -111,28 +111,28 @@
                                 <th scope="col">Actions</th>
                             </tr>
                           </thead>
-                        <tbody v-for="info in infos.MatieresScientifiques" :key="info.id">
-                              <tr>
-                                  <th scope="row">1</th>
-                                  <td> {{ info.codeMatiere  }} </td>
-                                  <td> {{ info.nomMatiere  }}</td>
-                                  <td> {{ info.Categorie  }} </td>
-                                  <td> {{ info.OrdreBulletin  }} </td>
-                                  <td> {{ info.nbreAffectation  }} </td>
-                                  <td>
-                                    <div class="row" style="max-width: 100%" >
-                                        <div class="col-md-3">
-                                          <router-link to="#" class="btn btn-xs btn-rounded btn-info">
-                                            <i class="fa fa-eye"></i>
-                                          </router-link>
-                                        </div>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteMatiere(info.id)"> <i class="fa fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                  </td>
-                              </tr>
+                          <tbody v-for="info in infos.MatieresScientifiques" :key="info.id">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td> {{ info.codeMatiere  }} </td>
+                                    <td> {{ info.nomMatiere  }}</td>
+                                    <td> {{ info.Categorie  }} </td>
+                                    <td> {{ info.OrdreBulletin  }} </td>
+                                    <td> {{ info.nbreAffectation  }} </td>
+                                    <td>
+                                      <div class="row" style="max-width: 100%" >
+                                          <div class="col-md-3">
+                                            <router-link to="#" class="btn btn-xs btn-rounded btn-info">
+                                              <i class="fa fa-eye"></i>
+                                            </router-link>
+                                          </div>
+                                          <div class="col-md-1"></div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteMatiere(info.id)"> <i class="fa fa-trash"></i></button>
+                                          </div>
+                                      </div>
+                                    </td>
+                                </tr>
                           </tbody>
                       </table>
                   </div>
@@ -207,8 +207,8 @@ export default {
             closeOnConfirm: true,
             closeOnCancel: true
         }).then((confirmed) => {
-           
-                axios
+            if (confirmed.isConfirmed) {
+               axios
                 .delete(`/api/matieres/${id}`)
                 .then(response => {
                     console.log(response.data)
@@ -216,7 +216,7 @@ export default {
                       if (response.data.message == "La matière a été supprimée avec succès.") {
                         this.$swal({
                             title: "Succès!",
-                            text: response.data.message,
+                            text:  response.data.message,
                             icon: "success",
                             timer: 1000,
                             showConfirmButton: false
@@ -230,7 +230,7 @@ export default {
                         });
                     }
                 });
-            
+            }
         });
     },
   },

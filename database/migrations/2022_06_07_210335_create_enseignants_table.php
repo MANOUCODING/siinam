@@ -15,13 +15,13 @@ class CreateEnseignantsTable extends Migration
     {
         Schema::create('enseignants', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable();
             $table->string('nom');
             $table->string('prenoms');
             $table->string('adresse');
             $table->string('email');
             $table->string('sexe');
             $table->string('telephone');
+            $table->integer('status')->default(1);
             $table->string('photoProfil')->nullable();
             $table->timestamps();
         });

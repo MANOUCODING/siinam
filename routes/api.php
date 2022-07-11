@@ -65,7 +65,9 @@ Route::get('/settings/rentree/scolaire/create', [AnneeScolaireController::class,
 
 Route::get('/settings/rentree/scolaire/{id}/edit', [AnneeScolaireController::class, 'edit']);
 
-Route::post('/settings/rentree/scolaire', [AnneeScolaireController::class, 'store']);
+Route::get('/settings/rentree/scolaire/{id}/activate', [AnneeScolaireController::class, 'active']);
+
+Route::post('/settings/rentree/scolaire/strore', [AnneeScolaireController::class, 'store']);
 
 Route::patch('/settings/rentree/scolaire/{id}', [AnneeScolaireController::class, 'update']);
 
@@ -80,9 +82,9 @@ Route::get('/settings/appreciations/matieres/create', [AppreciationMatiereContro
 
 Route::get('/settings/appreciations/matieres/{id}/edit', [AppreciationMatiereController::class, 'edit']);
 
-Route::post('/settings/appreciations/matieres', [AppreciationMatiereController::class, 'store']);
+Route::post('/settings/appreciations/matieres/store', [AppreciationMatiereController::class, 'store']);
 
-Route::patch('/settings/appreciations/matieres/{id}', [AppreciationMatiereController::class, 'update']);
+Route::put('/settings/appreciations/matieres/{id}/update', [AppreciationMatiereController::class, 'update']);
 
 Route::delete('/settings/appreciations/matieres/{id}', [AppreciationMatiereController::class, 'destroy']);
 
@@ -109,11 +111,11 @@ Route::get('/settings/coordonnees', [SchoolController::class, 'index']);
 
 Route::get('/settings/coordonnees/create', [SchoolController::class, 'create']);
 
-Route::get('/settings/coordonnees/{id}/edit', [SchoolController::class, 'edit']);
+Route::get('/settings/coordonnees/edit', [SchoolController::class, 'edit']);
 
 Route::post('/settings/coordonnees', [SchoolController::class, 'store']);
 
-Route::patch('/settings/coordonnees/{id}', [SchoolController::class, 'update']);
+Route::put('/settings/coordonnees/update', [SchoolController::class, 'update']);
 
 Route::delete('/settings/coordonnees/{id}', [SchoolController::class, 'destroy']);
 

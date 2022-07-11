@@ -20,9 +20,6 @@ import HeaderComponent from './components/includes/HeaderComponent.vue';
 
 import SettingsBarComponent from './components/includes/SettingsBarComponent.vue';
 
-
-import ModalCreateAppreciationMatiereComponent from './components/settings/AppreciationMatiere/CreateAppreciationMatiereComponent.vue';
-
 import CreateMatiereScientifiqueModal from './components/Matieres/Actions/Create/CreateMatiereScientifiqueModal.vue';
 
 import CreateMatiereLitteraireModal from './components/Matieres/Actions/Create/CreateMatiereLitteraireModal.vue';
@@ -42,7 +39,6 @@ app.use(LaravelVuePagination);
 app.component('sidebar', SideBarComponent)
 app.component('headerbar', HeaderComponent)
 app.component('settingsbar', SettingsBarComponent)
-app.component('modalAppreciationMatiere',  ModalCreateAppreciationMatiereComponent)
 app.component('modalAppreciationSemestre',  ModalCreateAppreciationSemestreComponent)
 app.component('createMatiereScientifiqueModal',  CreateMatiereScientifiqueModal)
 app.component('createMatiereLitteraireModal ',  CreateMatiereLitteraireModal )

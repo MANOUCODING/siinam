@@ -107,7 +107,7 @@
 	                        </li>
 
                           <li class="nav-item">
-	                            <router-link class="nav-link" to="/affectations"><i class=" fas fa-bars"></i>Gestion des Affections</router-link>
+	                            <router-link class="nav-link" to="#"><i class=" fas fa-bars"></i>Gestion des Affections</router-link>
 	                        </li>
 
 	                        

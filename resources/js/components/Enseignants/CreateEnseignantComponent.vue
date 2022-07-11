@@ -96,7 +96,7 @@
                                 <div class="form-group" v-else>
                                     <label for="validationServer03">Teléphone</label> <br>
                                     <input type="text" name="telephone_1"  v-model="data.telephone" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
-                                    <div v-for=" error_telephone_1 in errors.telephone" :key="error_telephone"  style="color: red; font-size: 0.9em">
+                                    <div v-for=" error_telephone in errors.telephone" :key="error_telephone"  style="color: red; font-size: 0.9em">
                                         {{ error_telephone }}
                                     </div>
                                 </div>

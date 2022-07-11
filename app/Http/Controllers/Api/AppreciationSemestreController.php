@@ -33,6 +33,23 @@ class AppreciationSemestreController extends  BaseController
         }
     }
 
+    public function college(){
+
+        $appreciationSemestresCollegeCount = AppreciationSemestre::where();
+
+        if (count($appreciationSemestres) == 0) {
+
+            return response()->json([
+                'message' => 'Aucune appréciation par semestre n\'est enregistrée',
+            ], 200);
+
+        } else {
+
+            return $this->sendResponse($appreciationSemestres, 'liste de toutes les appréciations par semestre.');
+
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

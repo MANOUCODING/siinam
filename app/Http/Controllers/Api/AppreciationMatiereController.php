@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\AppreciationMatiere;
+use App\Models\Matiere;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,19 +19,33 @@ class AppreciationMatiereController extends BaseController
 
     public function index(){
 
-        $appreciationMatieres = AppreciationMatiere::all();
+        $matieresCount  = Matiere::count();
 
-        if (count($appreciationMatieres) == 0) {
+        
+
+        if ($matieresCount == 0) {
 
             return response()->json([
-                'message' => 'Aucune appréciation par matière n\'est enregistrée',
+                'message' => 'Aucune matière n\'est enregistrée',
             ], 200);
 
         } else {
 
-            return $this->sendResponse($appreciationMatieres, 'liste de toutes les appréciations par matière.');
+            $appreciationMatieres = AppreciationMatiere::all();
 
+            if (count($appreciationMatieres) == 0) {
+
+                return response()->json([
+                    'message' => 'Aucune appréciation par matière n\'est enregistrée',
+                ], 200);
+    
+            } else {
+    
+                return $this->sendResponse($appreciationMatieres, 'liste de toutes les appréciations par matière.');
+    
+            }
         }
+        
     }
 
     /**
@@ -71,23 +86,23 @@ class AppreciationMatiereController extends BaseController
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return $this->sendError("Erreur de validation", $validator->errors());
         }
 
-        if ($datas['moyFaible'] >= 0  && $datas['moyFort'] <= 20) {
+        if ($datas['moyFort'] >= 0  && $datas['moyFaible'] <= 20) {
 
-            if ($datas['moyFaible'] < $datas['moyFort']) {
-
-                $datas['moyFaible'] = number_format((float)$datas['moyFaible'], 2, ',', '');
+            if ($datas['moyFort'] < $datas['moyFaible']) {
 
                 $datas['moyFort'] = number_format((float)$datas['moyFort'], 2, ',', '');
+
+                $datas['moyFaible'] = number_format((float)$datas['moyFaible'], 2, ',', '');
 
                 $appreciationMatiere = AppreciationMatiere::create($datas);
 
                 return $this->sendResponse($appreciationMatiere, 'Appréciation enregistrée avec succès.');
 
             } else {
-                return $this->sendError('Ooops ! Desolé, verifiez l"ecart de vos moyennes');
+                return $this->sendError('Ooops ! Desolé, verifiez l\'ecart de vos moyennes');
             }
 
         } else {
@@ -141,13 +156,13 @@ class AppreciationMatiereController extends BaseController
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        if ($datas['moyFaible'] >= 0  && $datas['moyFort'] <= 20) {
+        if ($datas['moyFort'] >= 0  && $datas['moyFaible'] <= 20) {
 
-            if ($datas['moyFaible'] < $datas['moyFort']) {
-
-                $datas['moyFaible'] = number_format((float)$datas['moyFaible'], 2, ',', '');
+            if ($datas['moyFort'] < $datas['moyFaible']) {
 
                 $datas['moyFort'] = number_format((float)$datas['moyFort'], 2, ',', '');
+
+                $datas['moyFaible'] = number_format((float)$datas['moyFaible'], 2, ',', '');
 
                 $appreciationMatiere = AppreciationMatiere::findOrFail($id);
 
@@ -156,11 +171,11 @@ class AppreciationMatiereController extends BaseController
                 return $this->sendResponse($appreciationMatiere, 'Appreciation modifiée avec succès.');
 
             } else {
-                return $this->sendError('Ooops ! Desolé, vos moyennes doivent être positive et compris entre 0 et 20');
+                return $this->sendError('Ooops ! Desolé, verifiez l\'ecart de vos moyennes');
             }
 
         } else {
-            return $this->sendError('Ooops ! Desolé, verifiez l"ecart de vos moyennes');
+            return $this->sendError('Ooops ! Desolé, vos moyennes doivent être positive et compris entre 0 et 20');
         }
     }
 
