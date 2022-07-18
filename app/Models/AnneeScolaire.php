@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class AnneeScolaire extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+
+    public function affectationsAnneeScolaire(){
+
+        return $this->hasMany(Affectation::class);
+
+    }
+
 }

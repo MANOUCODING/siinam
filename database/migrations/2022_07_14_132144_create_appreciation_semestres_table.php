@@ -17,9 +17,9 @@ class CreateAppreciationSemestresTable extends Migration
             $table->id();
             $table->string('moyFaible');
             $table->string('moyFort');
-            $table->string('niveau');
-            $table->string('section');
+            $table->unsignedBigInteger('classe_id');
             $table->string('appreciation');
+            $table->foreign('classe_id')->references('id')->on('classes');
             $table->timestamps();
         });
     }

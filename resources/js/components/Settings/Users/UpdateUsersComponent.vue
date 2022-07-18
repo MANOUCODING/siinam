@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="section-block" id="basicform">
-                  <h3 class="section-title">Ajouter  un utilisateur</h3>
+                  <h3 class="section-title">Modifier  un utilisateur</h3>
               </div>
               <div class="card">
                   <div class="card-body" v-if="empty == 0">
@@ -130,29 +130,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row"> <br>
-                          <div class="col-md-12">
-                              <div v-if="!errors.role_id">
-                                  <h5>Choisir le role</h5>
-                                  <div class="input-group mb-3">
-                                      <select class="custom-select" name="role_id" v-model="data.role_id">
-                                          <option  v-for="role in roles" :key="role.id" :value="role.id"><h1>{{ role.name }}</h1></option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div v-else>
-                                  <h5>Choisir le role</h5>
-                                  <div >
-                                      <select class="custom-select" name="role_id" v-model="data.role_id">
-                                          <option  v-for="role in roles" :key="role.id" :value="role.id"> <h5>{{ role.name }}</h5> </option>
-                                      </select>
-                                  </div>
-                                  <div v-for=" error_role in errors.role_id" :key="error_role" style="color: red; font-size: 0.9em">
-                                      {{ error_role }}
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
                         <div style="float: right">
                             <div class="my-3" v-if="loadingSave">
                                 <button class="btn  btn-primary"  type="button">
@@ -160,7 +137,7 @@
                                 </button>
                             </div>
                             <div class="my-3" v-if="!loadingSave">
-                                <button type="submit" class="btn btn-primary" @click.prevent="create" >Enregistrez</button>
+                                <button type="submit" class="btn btn-primary" @click.prevent="update" >Enregistrez</button>
                             </div>
                         </div>
                     </form>
@@ -195,6 +172,7 @@ export default {
   data(){
       return{
           roles : {},
+          roleH : null,
           data:{
               nom :  null,
               prenoms: null,
@@ -202,8 +180,6 @@ export default {
               telephone: null,
               sexe: null,
               adresse: null,
-              role_id: null,
-              password: null,
           },
           errors: {},
           errorcheck: true,
@@ -217,9 +193,8 @@ export default {
 
     getResults(){
       axios
-        .get('/api/settings/users/create')
+        .get(`/api/settings/users/${this.$route.params.id}/edit`)
         .then(response => {
-           console.log(response)
           if(response.status == 200){
             if (response.data.success == false) {
 
@@ -230,16 +205,17 @@ export default {
               } else {
                 this.empty = 0
                 this.roles = response.data.roles
-                console.log(response.data)
+                this.data = response.data.personnel
+                this.roleH = response.data.personnel.name
               }
             }
           }
       });
     },
 
-    create(){
+    update(){
        this.loadingSave = true
-        axios.post('/api/settings/users/store', this.data)
+        axios.put(`/api/settings/users/${this.$route.params.id}/update`, this.data)
         .then(response => {
             if (response.data.success == true) {
                 this.$swal({
@@ -254,7 +230,6 @@ export default {
                 this.errorcheck = false
                 this.errors = response.data.errors
                 this.loadingSave = false
-                console.log(this.errors)
             }
         }).catch(error => console.log(error))
     }

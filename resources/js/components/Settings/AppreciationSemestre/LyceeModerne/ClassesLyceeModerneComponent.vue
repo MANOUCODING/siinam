@@ -93,7 +93,7 @@
           <!-- ============================================================== -->
           <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
-                  <h5 class="card-header">Liste des appreciations pour le collège</h5>
+                  <h5 class="card-header">Liste des appreciations pour le lycée Moderne</h5>
                   <div class="card-body" v-if="empty == 0">
                       <table class="table table-bordered">
                           <thead>
@@ -183,16 +183,16 @@ export default {
   methods:{
     getResults(){
       axios
-        .get('/api/settings/appreciations/semestres/college')
+        .get('/api/settings/appreciations/semestres/lyceemoderne')
         .then(response => {
           if(response.status == 200){
             console.log(response.data)
             if (response.data.success == false) {
 
-              if (response.data.message == 'Aucune  Classe du collège n\'est enregistrée') {
+              if (response.data.message == 'Aucune  Classe du lycée moderne n\'est enregistrée') {
                 this.empty = 1
                 this.message = response.data.message
-              } else if(response.data.message == 'Aucune  appréciation par semestre du collège n\'est enregistrée'){
+              } else if(response.data.message == 'Aucune  appréciation par semestre du lycée moderne n\'est enregistrée'){
                 this.empty = 1
                 this.message = response.data.message
               }

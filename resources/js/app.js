@@ -20,13 +20,6 @@ import HeaderComponent from './components/includes/HeaderComponent.vue';
 
 import SettingsBarComponent from './components/includes/SettingsBarComponent.vue';
 
-import CreateMatiereScientifiqueModal from './components/Matieres/Actions/Create/CreateMatiereScientifiqueModal.vue';
-
-import CreateMatiereLitteraireModal from './components/Matieres/Actions/Create/CreateMatiereLitteraireModal.vue';
-
-import CreateMatiereFacultatifsModal from './components/Matieres/Actions/Create/CreateMatiereFacultatifsModal.vue';
-
-import ModalCreateAppreciationSemestreComponent from './components/settings/AppreciationSemestre/CreateAppreciationSemestreComponent.vue';
 
 const app = createApp(App);
 
@@ -39,10 +32,7 @@ app.use(LaravelVuePagination);
 app.component('sidebar', SideBarComponent)
 app.component('headerbar', HeaderComponent)
 app.component('settingsbar', SettingsBarComponent)
-app.component('modalAppreciationSemestre',  ModalCreateAppreciationSemestreComponent)
-app.component('createMatiereScientifiqueModal',  CreateMatiereScientifiqueModal)
-app.component('createMatiereLitteraireModal ',  CreateMatiereLitteraireModal )
-app.component('createMatiereFacultatifsModal', CreateMatiereFacultatifsModal)
+
 
 login.use(router).mount('#login');
 

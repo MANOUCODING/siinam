@@ -92,9 +92,21 @@ Route::view('/settings/appreciations/matieres/{id}/edit', 'dashboard');
 
 Route::view('/settings/appreciations/matieres/create', 'dashboard');
 
-Route::view('/settings/appreciations/semestres', 'dashboard');
+Route::view('/settings/appreciations/semestres/colleges', 'dashboard');
+
+Route::view('/settings/appreciations/semestres/{id}/show', 'dashboard');
+
+Route::view('/settings/appreciations/semestres/{id}/create', 'dashboard');
+
+Route::view('/settings/appreciations/semestres/lyceetechnique', 'dashboard');
+
+Route::view('/settings/appreciations/semestres/lyceemoderne', 'dashboard');
 
 Route::view('/settings/users', 'dashboard');
+
+Route::view('/settings/users/{id}/show', 'dashboard');
+
+Route::view('/settings/users/{id}/edit', 'dashboard');
 
 Route::view('/settings/users/create', 'dashboard');
 

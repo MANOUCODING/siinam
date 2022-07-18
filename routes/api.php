@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ClasseController;
 use App\Http\Controllers\Api\DecisionConseilController;
 use App\Http\Controllers\Api\EnseignantController;
 use App\Http\Controllers\Api\MatiereController;
+use App\Http\Controllers\Api\PersonnelController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\AuthController;
 use App\Models\AppreciationMatiere;
@@ -57,6 +58,23 @@ Route::patch('/settings/decisions/conseils/{id}', [DecisionConseilController::cl
 Route::delete('/settings/decisions/conseils/{id}', [DecisionConseilController::class, 'destroy']);
 
 
+// Parametres gestion des utilisateurs
+
+Route::get('/settings/users', [PersonnelController::class, 'index']);
+
+Route::get('/settings/users/create', [PersonnelController::class, 'create']);
+
+Route::get('/settings/users/{id}/edit', [PersonnelController::class, 'edit']);
+
+Route::get('/settings/users/{id}/show', [PersonnelController::class, 'show']);
+
+Route::post('/settings/users/store', [PersonnelController::class, 'store']);
+
+Route::put('/settings/users/{id}/update', [PersonnelController::class, 'update']);
+
+Route::delete('/settings/users/{id}/delete', [PersonnelController::class, 'destroy']);
+
+
 // Parametres Rentree scolaire
 
 Route::get('/settings/rentree/scolaire', [AnneeScolaireController::class, 'index']);
@@ -91,18 +109,23 @@ Route::delete('/settings/appreciations/matieres/{id}', [AppreciationMatiereContr
 
 // Parametres Apreciations par Semestre
 
-Route::get('/settings/appreciations/semestres', [AppreciationSemestreController::class, 'index']);
+Route::get('/settings/appreciations/semestres/college', [AppreciationSemestreController::class, 'college']);
 
-Route::get('/settings/appreciations/semestres/create', [AppreciationSemestreController::class, 'create']);
+Route::get('/settings/appreciations/semestres/lyceemoderne', [AppreciationSemestreController::class, 'LyceeModerne']);
 
-Route::get('/settings/appreciations/semestres/{id}/edit', [AppreciationSemestreController::class, 'edit']);
+Route::get('/settings/appreciations/semestres/lyceetechnique', [AppreciationSemestreController::class, 'LyceeTechnique']);
 
-Route::post('/settings/appreciations/semestres', [AppreciationSemestreController::class, 'store']);
+Route::get('/settings/appreciations/semestres/{id}/create', [AppreciationSemestreController::class, 'create']);
+
+Route::get('/settings/appreciations/semestres/{id}/show', [AppreciationSemestreController::class, 'show']);
+
+Route::post('/settings/appreciations/semestres/{id}/store', [AppreciationSemestreController::class, 'store']);
 
 Route::patch('/settings/appreciations/semestres/{id}', [AppreciationSemestreController::class, 'update']);
 
-Route::delete('/settings/appreciations/semestres/{id}', [AppreciationSemestreController::class, 'destroy']);
+Route::delete('/settings/appreciations/semestres/{id}/destroy', [AppreciationSemestreController::class, 'destroy']);
 
+Route::delete('/settings/appreciations/semestres/{id}/destroyAll', [AppreciationSemestreController::class, 'destroyAll']);
 
 
 // Parametres Coordonnées de l'etablissement

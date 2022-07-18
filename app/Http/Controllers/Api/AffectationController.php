@@ -8,6 +8,7 @@ use App\Models\Classe;
 use App\Models\Enseignant;
 use App\Models\Matiere;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AffectationController extends BaseController
 {
@@ -48,7 +49,19 @@ class AffectationController extends BaseController
                         return response()->json(['message' => 'Aucune matiere n\'est enregistrée'], 200);
     
                     }else{
+                        $affectationsMatieresLitteraires = DB::table("enseignants") ->select(array("enseignants.id", "enseignants.nom", "enseignants.prenoms","enseignants.telephone", DB::raw('COUNT(affectations.id) as nbre_affectations')))
+                        ->where("matieres.Categorie", "Matières Littéraires")
+                        ->leftJoin("affectations", "affectations.enseignant_id", "=", "enseignants.id")
+                        ->leftJoin("matieres", "matieres.id", "=", "affectations.matiere_id")
+                        ->groupBy("enseignants.id", "enseignants.nom", "enseignants.prenoms","enseignants.telephone")
+                        ->orderBy('nbre_affectations', 'desc')
+                        ->get();
 
+                        $affectationsMatieresLitterairesCount = DB::table("enseignants")
+                        ->where("matieres.Categorie", "Matières Littéraires")
+                        ->leftJoin("matieres", "matieres.id", "=", "affectations.matiere_id")
+                        ->count();
+                        
                     }
 
                 }

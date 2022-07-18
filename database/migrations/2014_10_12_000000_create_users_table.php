@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->integer('status')->default(1);
             $table->integer('dejaConnecte')->default(0);
-            $table->string('role');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
         });
     }

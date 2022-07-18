@@ -15,6 +15,17 @@ class CreateAffectationsTable extends Migration
     {
         Schema::create('affectations', function (Blueprint $table) {
             $table->id();
+            $table->string('jour');
+            $table->time('heureDebut');
+            $table->time('heureFin');
+            $table->unsignedBigInteger('matiere_id');
+            $table->unsignedBigInteger('enseignant_id');
+            $table->unsignedBigInteger('classe_id');
+            $table->unsignedBigInteger('anneeScolaire_id');
+            $table->foreign('matiere_id')->references('id')->on('matieres');
+            $table->foreign('enseignant_id')->references('id')->on('enseignants');
+            $table->foreign('classe_id')->references('id')->on('classes');
+            $table->foreign('anneeScolaire_id')->references('id')->on('annee_scolaires');
             $table->timestamps();
         });
     }

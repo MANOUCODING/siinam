@@ -86,7 +86,9 @@ class AppreciationMatiereController extends BaseController
         ]);
 
         if($validator->fails()){
+
             return $this->sendError("Erreur de validation", $validator->errors());
+            
         }
 
         if ($datas['moyFort'] >= 0  && $datas['moyFaible'] <= 20) {

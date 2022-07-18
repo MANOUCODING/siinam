@@ -18,6 +18,19 @@ class User extends Authenticatable
      */
     protected $guarded = [];
 
+
+    public function personnels(){
+
+        return $this->belongsTo(Personnel::class);
+
+    }
+
+    public function role(){
+
+        return $this->belongsTo(Role::class);
+
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

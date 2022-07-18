@@ -10,5 +10,11 @@ class Enseignant extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function affectationsEnseignants(){
+
+        return $this->hasMany(Affectation::class);
+
+    }
     
 }

@@ -33,13 +33,22 @@ import CreateEnseignantComponent from '../components/Enseignants/CreateEnseignan
 
 import SettingsHomeComponent from '../components/Settings/HomeComponent.vue';
 
-import SettingsAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/AppreciationMatiereComponent.vue';
+import  SettingsAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/AppreciationMatiereComponent.vue'; 
 
 import SettingsCreateAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/CreateAppreciationMatiereComponent.vue';
 
 import SettingsUpdateAppreciationMatiereComponent from '../components/Settings/AppreciationMatiere/UpdateAppreciationMatiereComponent.vue';
 
-import SettingsAppreciationSemestreComponent from '../components/Settings/AppreciationSemestre/AppreciationSemestreComponent.vue'
+import SettingsAppreciationSemestreClassesCollegeComponent from '../components/Settings/AppreciationSemestre/College/ClassesCollegeComponent.vue';
+
+import SettingsAppreciationSemestreClassesLyceeModerneComponent from '../components/Settings/AppreciationSemestre/LyceeModerne/ClassesLyceeModerneComponent.vue';
+
+import SettingsAppreciationSemestreCreateAppreciationSemestreComponent from '../components/Settings/AppreciationSemestre/CreateAppreciationSemestreComponent.vue';
+
+import SettingsAppreciationSemestreClassesLyceeTechniqueComponent from '../components/Settings/AppreciationSemestre/LyceeTechnique/ClassesLyceeTechniqueComponent.vue';
+
+import SettingsAppreciationSemestreShowAppreciationComponent from '../components/Settings/AppreciationSemestre/ShowAppreciationComponent.vue';
+
 
 //Parametres gestion des decisions du conseils
 
@@ -88,7 +97,11 @@ import SettingsCreateAnneeScolaireComponent from '../components/Settings/AnneeSc
 
 import SettingsUsersComponent from '../components/Settings/Users/UsersComponent.vue';
 
-import SettingsCreateUsersComponent from '../components/Settings/Users/CreateUsersComponent.vue'
+import SettingsCreateUsersComponent from '../components/Settings/Users/CreateUsersComponent.vue';
+
+import SettingsUpdateUsersComponent from '../components/Settings/Users/UpdateUsersComponent.vue';
+
+import SettingsShowUsersComponent from '../components/Settings/Users/ShowUsersComponent.vue';
 
 
 const routes = [
@@ -308,9 +321,33 @@ const routes = [
 
   //Appreciation par semestre
   {
-    path: '/settings/appreciations/semestres',
-    component: SettingsAppreciationSemestreComponent,
-    name: 'settings.appreciations.semestres'
+    path: '/settings/appreciations/semestres/colleges',
+    component: SettingsAppreciationSemestreClassesCollegeComponent,
+    name: 'settings.appreciations.semestres.college'
+  }, 
+
+  {
+    path: '/settings/appreciations/semestres/:id/show',
+    component: SettingsAppreciationSemestreShowAppreciationComponent,
+    name: 'settings.appreciations.semestres.show'
+  }, 
+
+  {
+    path: '/settings/appreciations/semestres/:id/create',
+    component: SettingsAppreciationSemestreCreateAppreciationSemestreComponent,
+    name: 'settings.appreciations.semestres.create'
+  }, 
+
+  {
+    path: '/settings/appreciations/semestres/lyceemoderne',
+    component: SettingsAppreciationSemestreClassesLyceeModerneComponent,
+    name: 'settings.appreciations.semestres.lyceemoderne'
+  }, 
+
+  {
+    path: '/settings/appreciations/semestres/lyceetechnique',
+    component: SettingsAppreciationSemestreClassesLyceeTechniqueComponent,
+    name: 'settings.appreciations.semestres.lyceetechnique'
   }, 
 
   //Annee Scolaire
@@ -338,6 +375,18 @@ const routes = [
     path: '/settings/users/create',
     component: SettingsCreateUsersComponent,
     name: 'settings.users.create'
+  }, 
+
+  {
+    path: '/settings/users/:id/edit',
+    component:  SettingsUpdateUsersComponent,
+    name: 'settings.users.update'
+  }, 
+
+  {
+    path: '/settings/users/:id/show',
+    component:  SettingsShowUsersComponent,
+    name: 'settings.users.show'
   }, 
 ];
 

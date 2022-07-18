@@ -12,7 +12,7 @@
 
       </div>
       <div class="email-body">
-          <div class="row" v-if="!empty">
+          <div class="row" v-if="empty == 0">
           <!-- ============================================================== -->
           <!-- campaign activities   -->
           <!-- ============================================================== -->
@@ -24,17 +24,47 @@
                       <table class="table">
                           <thead>
                               <tr class="border-0">
-                                  <th class="border-0">Profil</th>
+                                  <th class="border-0">Code</th>
                                   <th class="border-0">Nom Complet</th>
                                   <th class="border-0">Télephone</th>
-                                  <th class="border-0">Adresse</th>
+                                   <th class="border-0">Status</th>
                                   <th class="border-0">Role</th>
                                   <th class="border-0">Actions</th>
                               </tr>
                           </thead>
-                          <tbody>
-
-                          </tbody>
+                          <tbody v-for="info in infos.personnels" :key="info.id">
+                                <tr>
+                                    <th scope="row">{{ info.code  }}</th>
+                                    <td> {{ info.nom  }} {{ info.prenoms  }} </td>
+                                    <td> {{ info.telephone }}</td>
+                                    <td v-if="info.status == 1"> 
+                                      <button type="button" class="btn btn-xs btn-rounded  btn-primary" >Actif</button>  
+                                    </td>
+                                     <td v-if="info.status == 0"> 
+                                      <button type="button" class="btn btn-xs btn-rounded  btn-danger" >Inactif</button>  
+                                    </td>
+                                    <td>  
+                                      <button type="button" class="btn btn-xs btn-rounded btn-primary"> {{ info.name }} </button> 
+                                    </td>
+                                    <td>
+                                      <div class="row" style="max-width: 100%" >
+                                          <div class="col-md-3">
+                                            <router-link :to="{ name: 'settings.users.show', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-info">
+                                              <i class="fa fa-eye"></i>
+                                            </router-link>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <router-link :to="{ name: 'settings.users.update', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
+                                              <i class="fa fa-edit"></i>
+                                            </router-link>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deletePersonnel(info.id)"> <i class="fa fa-trash"></i></button>
+                                          </div>
+                                      </div>
+                                    </td>
+                                </tr>
+                            </tbody>
                       </table>
                   </div>
               </div>
@@ -43,7 +73,7 @@
           <!-- end campaign activities   -->
           <!-- ============================================================== -->
         </div>
-        <div class="row" v-else>
+        <div class="row" v-else-if="empty == 1">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div style="position: relative; height: 500px;">
@@ -67,8 +97,8 @@ export default {
 
   data() {
       return {
-        coordonnes: {},
-        empty : 1,
+        infos: {},
+        empty : null,
         message: "",
       }
   },
@@ -76,24 +106,61 @@ export default {
   methods: {
     getResults(){
       axios
-        .get('/api/settings/coordonnees')
+        .get('/api/settings/users')
         .then(response => {
-           console.log(response)
           if(response.status == 200){
             if (response.data.success == false) {
 
             }else{
-              if (response.data.message == 'Aucune information n\'est enregistrée') {
+              if (response.data.message == 'Aucun personnel n\'est enregistré') {
+                this.empty = 1
                 this.message = response.data.message
-                console.log(response.data)
               } else {
                 this.empty = 0
-                this.coordonnes = response.data.school
-                console.log(response.data)
+                this.infos = response.data
+               
               }
             }
           }
       });
+    },
+
+    deletePersonnel(id) {
+        this.$swal({
+            title: "Etes-vous sûr?",
+            text: "Vous ne pourrez plus récupérer ce Personnel!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "blue",
+            confirmButtonText: "Oui, supprimez!",
+            cancelButtonText: "Non, annuler !",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }).then((confirmed) => {
+              if (confirmed.isConfirmed) {
+                axios
+                .delete(`/api/settings/users/${id}/delete`)
+                .then(response => {
+                    this.getResults();
+                      if (response.data.message == "Le Personnel  a été supprimée avec succès.") {
+                        this.$swal({
+                            title: "Succès!",
+                            text: response.data.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        this.$swal({
+                            title: "Erreur",
+                            text: response.data.message,
+                            icon: "error",
+                            timer: 1000
+                        });
+                    }
+                });
+              }
+        });
     },
   },
 
@@ -102,5 +169,4 @@ export default {
     }
 
 }
-
 </script>

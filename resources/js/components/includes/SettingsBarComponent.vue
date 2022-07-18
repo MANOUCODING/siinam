@@ -34,7 +34,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/settings/appreciations/semestres"><span class="icon"><i class="fas  fa-fw fa-check-circle"></i></span>
+                        <router-link to="/settings/appreciations/semestres/colleges"><span class="icon"><i class="fas  fa-fw fa-check-circle"></i></span>
                             Appréciation par Semestre
                         </router-link>
                     </li>

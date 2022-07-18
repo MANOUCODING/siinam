@@ -10,4 +10,10 @@ class AppreciationSemestre extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function classesAppreciationSemestres(){
+
+        return $this->belongsTo(Classe::class);
+
+    }
 }
