@@ -51,7 +51,7 @@
                                           </router-link>
                                         </div>
                                         <div class="col-md-3">
-                                          <router-link to="#" class="btn btn-xs btn-rounded btn-primary">
+                                          <router-link :to="{ name: 'settings.annee-scolaire.update', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
                                             <i class="fa fa-edit"></i>
                                           </router-link>
                                         </div>

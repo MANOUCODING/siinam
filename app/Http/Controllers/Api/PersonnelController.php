@@ -81,7 +81,11 @@ class PersonnelController extends BaseController
             ->leftJoin("users", "users.id", "=", "personnels.user_id")
             ->first();
 
-            return response()->json(['roles' => Role::all(), 'personnel' => $personnel ], 200);
+            if ( $personnel == null) {
+                return response()->json(['message' => 'Aucune Information trouvée.'], 200);
+            } else {
+                return response()->json(['roles' => Role::all(), 'personnel' => $personnel ], 200);
+            }
         }
     }
 
@@ -250,11 +254,11 @@ class PersonnelController extends BaseController
     {
         $personnel = Personnel::findOrFail($id);
 
-        $user = Personnel::findOrFail($personnel->user_id);
+        $user = User::findOrFail($personnel->user_id);
+
+        $personnel->delete();
 
         $user->delete();
-            
-        $personnel->delete();
 
         return $this->sendResponse($personnel, "Le Personnel  a été supprimée avec succès.");
     }

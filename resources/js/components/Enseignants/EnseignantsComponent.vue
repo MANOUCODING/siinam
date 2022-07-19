@@ -37,10 +37,9 @@
                       <table class="table table-bordered">
                           <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Code</th>
                                 <th scope="col">Nom Complet</th>
                                 <th scope="col">Telephone</th>
-                                <th scope="col">email</th>
                                 <th scope="col">Adresse</th>
                                 <th scope="col">Sexe</th>
                                 <th scope="col">Status</th>
@@ -49,10 +48,9 @@
                           </thead>
                             <tbody v-for="info in infos.enseignants" :key="info.id">
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row">{{ info.code  }}</th>
                                     <td> {{ info.nom  }} {{ info.prenoms  }} </td>
                                     <td> {{ info.telephone }}</td>
-                                    <td> {{ info.email  }} </td>
                                     <td> {{ info.adresse  }} </td>
                                     <td> {{ info.sexe  }} </td>
                                     <td>  <button type="button" v-if="info.status" class="btn btn-xs btn-rounded btn-primary">Actif</button>
@@ -65,7 +63,7 @@
                                             </router-link>
                                           </div>
                                           <div class="col-md-3">
-                                            <router-link to="#" class="btn btn-xs btn-rounded btn-primary">
+                                            <router-link :to="{ name:'UpdateEnseignantComponent', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
                                               <i class="fa fa-edit"></i>
                                             </router-link>
                                           </div>
@@ -119,18 +117,16 @@ export default {
       axios
         .get('/api/enseignants')
         .then(response => {
-           console.log(response)
           if(response.status == 200){
             if (response.data.success == false) {
 
             }else{
-              if (response.data.message == 'Aucun enseignant n\'est enregistrée') {
+              if (response.data.message == 'Aucun enseignant n\'est enregistré') {
                 this.empty = 1
                 this.message = response.data.message
               } else {
                 this.empty = 0
                 this.infos = response.data
-                console.log(response.data)
               }
             }
           }

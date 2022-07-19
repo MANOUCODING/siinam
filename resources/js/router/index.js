@@ -28,6 +28,7 @@ import EnseignantsComponent from '../components/Enseignants/EnseignantsComponent
 
 import CreateEnseignantComponent from '../components/Enseignants/CreateEnseignantComponent.vue';
 
+import UpdateEnseignantComponent from '../components/Enseignants/UpdateEnseignantComponent.vue';
 
 //Importer les composants des paramètres
 
@@ -94,6 +95,8 @@ import SettingsUpdateCoordonneesComponent from '../components/Settings/Coordonne
 import SettingsAnneeScolaireComponent from '../components/Settings/AnneeScolaire/AnneeScolaireComponent.vue';
 
 import SettingsCreateAnneeScolaireComponent from '../components/Settings/AnneeScolaire/CreateAnneeScolaireComponent.vue';
+
+import SettingsUpdateAnneeScolaireComponent from '../components/Settings/AnneeScolaire/UpdateAnneeScolaireComponent.vue';
 
 import SettingsUsersComponent from '../components/Settings/Users/UsersComponent.vue';
 
@@ -184,6 +187,13 @@ const routes = [
     path: '/enseignants/create',
     component:  CreateEnseignantComponent,
     name: 'CreateEnseignantComponent'
+  },
+
+  //Ajouter un enseignant
+  {
+    path: '/enseignants/:id/edit',
+    component:  UpdateEnseignantComponent,
+    name: 'UpdateEnseignantComponent'
   },
 
 
@@ -362,6 +372,12 @@ const routes = [
     path: '/settings/annee-scolaire/create',
     component:  SettingsCreateAnneeScolaireComponent,
     name: 'settings.annee-scolaire.create'
+  }, 
+
+  {
+    path: '/settings/annee-scolaire/:id/edit',
+    component:  SettingsUpdateAnneeScolaireComponent,
+    name: 'settings.annee-scolaire.update'
   }, 
 
   //Appreciation par semestre

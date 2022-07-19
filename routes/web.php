@@ -39,6 +39,8 @@ Route::view('/enseignants', 'dashboard');
 
 Route::view('/enseignants/create', 'dashboard');
 
+Route::view('/enseignants/{id}/edit', 'dashboard');
+
 //Route pour la gestion des paramètres
 
 Route::view('/settings/home', 'dashboard');
@@ -113,3 +115,5 @@ Route::view('/settings/users/create', 'dashboard');
 Route::view('/settings/annee-scolaire', 'dashboard');
 
 Route::view('/settings/annee-scolaire/create', 'dashboard');
+
+Route::view('/settings/annee-scolaire/{id}/edit', 'dashboard');

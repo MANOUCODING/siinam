@@ -82,7 +82,7 @@ class AnneeScolaireController extends BaseController
             
             if ($anneeScolaireMoment == 1) {
 
-                return $this->sendError('Ooops Desolé. Il ne peut pas avoir de rentrées scolaires inactives');
+                return $this->sendError('Ooops Desolé. Il ne peut pas avoir deux rentrées scolaires inactives');
 
             } else {
 
@@ -118,9 +118,19 @@ class AnneeScolaireController extends BaseController
     {
 
         try {
+
             $anneeScolaire = AnneeScolaire::findOrFail($id);
 
-            return response()->json([$anneeScolaire]);
+            if ($anneeScolaire == null) {
+
+                return response()->json([ 'message' => 'Aucune Information trouvée.'  ]);
+
+            } else {
+
+                return response()->json([$anneeScolaire]);
+
+            }
+            
 
         } catch (ModelNotFoundException $modelNotFoundException){
 
@@ -141,13 +151,13 @@ class AnneeScolaireController extends BaseController
     {
         $datas = $request->all();
         $validator = Validator::make($datas, [
-            'dateDebut' => 'required|date_format:d/m/Y',
-            'dateFin' => 'required|date_format:d/m/Y',
+            'dateDebut' => 'required',
+            'dateFin' => 'required',
             'TypePeriode' => 'required|string',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return $this->sendError("Erreur de validation", $validator->errors());
         }
 
         if($datas['dateDebut'] < $datas['dateFin'] ){
@@ -162,16 +172,15 @@ class AnneeScolaireController extends BaseController
 
             $datas['anneeScolaire'] = $anneeDebut.'-'.$anneeFin ;
 
+            
             $anneeScolaire = AnneeScolaire::findOrFail($id);
 
             $anneeScolaire->update($datas);
 
-            return $this->sendResponse( $anneeScolaire, 'Une Nouvelle Rentrée Scoalire a été modifiée avec succès.');
+            return $this->sendResponse( $anneeScolaire, 'La rentrée a été modifiée avec succès.');
 
         }else{
-
-            return $this->sendError('Ooops Desolé. La date de fin est anterieure à la date du debut');
-
+            return $this->sendError('Ooops Desolé. La date de fin est antérieure à la date du debut');
         }
     }
 

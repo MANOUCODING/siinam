@@ -87,7 +87,7 @@ Route::get('/settings/rentree/scolaire/{id}/activate', [AnneeScolaireController:
 
 Route::post('/settings/rentree/scolaire/strore', [AnneeScolaireController::class, 'store']);
 
-Route::patch('/settings/rentree/scolaire/{id}', [AnneeScolaireController::class, 'update']);
+Route::put('/settings/rentree/scolaire/{id}/update', [AnneeScolaireController::class, 'update']);
 
 Route::delete('/settings/rentree/scolaire/{id}', [AnneeScolaireController::class, 'destroy']);
 
@@ -193,6 +193,6 @@ Route::get('/enseignants/{id}/edit', [EnseignantController::class, 'edit']);
 
 Route::post('/enseignants/store', [EnseignantController::class, 'store']);
 
-Route::patch('/enseignants/{id}', [EnseignantController::class, 'update']);
+Route::put('/enseignants/{id}/update', [EnseignantController::class, 'update']);
 
 Route::delete('/enseignants/{id}', [EnseignantController::class, 'destroy']);

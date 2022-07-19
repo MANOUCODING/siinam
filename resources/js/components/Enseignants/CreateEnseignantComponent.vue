@@ -32,9 +32,9 @@
               <div class="card">
                   <h5 class="card-header">Ajouter un enseignant</h5>
                    <div>
-                        <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"EnseignantsComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-plus"></i>Liste des enseignants</router-link>
+                        <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"EnseignantsComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-bars"></i>Liste des enseignants</router-link>
                     </div>
-                  <div class="card-body">
+                  <div class="card-body" v-if="empty == 0">
                       <form>
                       <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -155,6 +155,18 @@
                         </div>
                     </form>
                   </div>
+                   <div class="card-body" v-else-if="empty == 1">
+                     <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div style="position: relative; height: 400px;">
+                                <img src="/assets/admin/images/empty.png" style="width: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="empty">
+                            </div>
+                            <h4 style="text-align: center; margin-top: -50px"> {{ message  }} </h4>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                  </div>
               </div>
           </div>
           <!-- ============================================================== -->
@@ -184,19 +196,14 @@
                 errors: {},
                 errorcheck: true,
                 loadingSave: false,
+                empty: null,
+                message: null
             }
         },
         methods: {
            create(){
                 this.loadingSave = true
-                axios.post('/api/enseignants/store', {
-                nom: this.data.nom,
-                prenoms: this.data.prenoms,
-                email: this.data.email,
-                telephone: this.data.telephone,
-                sexe: this.data.sexe,
-                adresse: this.data.adresse,
-                })
+                axios.post('/api/enseignants/store', this.data)
                 .then(response => {
                    if (response.data.success == true) {
                        this.$swal({
@@ -211,13 +218,31 @@
                        this.errorcheck = false
                        this.errors = response.data.errors
                        this.loadingSave = false
-                       console.log(this.errors)
                    }
                 }).catch(error => console.log(error))
-           }
+           },
+
+            getResults(){
+                axios
+                    .get('/api/enseignants/create')
+                    .then(response => {
+                    if(response.status == 200){
+                        if (response.data.success == false) {
+
+                        }else{
+                        if (response.data.message == "Aucun role n'est enregistré") {
+                            this.empty = 1
+                            this.message = response.data.message
+                        } else {
+                            this.empty = 0
+                        }
+                        }
+                    }
+                });
+            },
         },
         mounted(){
-            console.log('Component Mounted')
+            this.getResults();
         },
     }
 </script>

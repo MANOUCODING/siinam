@@ -1,28 +1,41 @@
 <template>
-
-  <div class="container-fluid">
-    <settingsbar> </settingsbar>
-    <div class="main-content container-fluid p-0">
-      <div class="email-head">
-          <div class="email-head-subject">
-              <div class="title"><a class="active" href="#"><span class="icon"><i class="fas fa-2x fa-cog"></i></span></a> <span>Gestion des Utilisateurs</span>
-                  <div class="icons"><router-link to="/settings/users" class="btn btn-lg btn-primary btn-block icon" style="color: #fff"><i class="fas fa-bars"></i> &nbsp; Les Utilisateurs</router-link></div>
-              </div>
-          </div>
-          
-      </div>
-      <div class="email-body">
+  <div class="dashboard-influence">
+    <div class="container-fluid dashboard-content">
         <!-- ============================================================== -->
-        <!-- basic form  -->
+        <!-- pageheader  -->
         <!-- ============================================================== -->
         <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-              <div class="section-block" id="basicform">
-                  <h3 class="section-title">Ajouter  un utilisateur</h3>
-              </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h3 class="mb-2">Les enseignants</h3>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Gestion des enseignants</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Liste de tous les enseignants</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- widgets   -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <!-- ============================================================== -->
+          <!-- bordered table -->
+          <!-- ============================================================== -->
+
+          <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
+                  <h5 class="card-header">Modifier un enseignant</h5>
+                   <div>
+                        <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"EnseignantsComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-bars"></i>Liste des enseignants</router-link>
+                    </div>
                   <div class="card-body" v-if="empty == 0">
-                    <form>
+                      <form>
                       <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h5>Choisir une photo</h5>
@@ -130,29 +143,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row"> <br>
-                          <div class="col-md-12">
-                              <div v-if="!errors.role_id">
-                                  <h5>Choisir le role</h5>
-                                  <div class="input-group mb-3">
-                                      <select class="custom-select" name="role_id" v-model="data.role_id">
-                                          <option  v-for="role in roles" :key="role.id" :value="role.id"><h1>{{ role.name }}</h1></option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div v-else>
-                                  <h5>Choisir le role</h5>
-                                  <div >
-                                      <select class="custom-select" name="role_id" v-model="data.role_id">
-                                          <option  v-for="role in roles" :key="role.id" :value="role.id"> <h5>{{ role.name }}</h5> </option>
-                                      </select>
-                                  </div>
-                                  <div v-for=" error_role in errors.role_id" :key="error_role" style="color: red; font-size: 0.9em">
-                                      {{ error_role }}
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
                         <div style="float: right">
                             <div class="my-3" v-if="loadingSave">
                                 <button class="btn  btn-primary"  type="button">
@@ -160,12 +150,12 @@
                                 </button>
                             </div>
                             <div class="my-3" v-if="!loadingSave">
-                                <button type="submit" class="btn btn-primary" @click.prevent="create" >Enregistrez</button>
+                                <button type="submit" class="btn btn-primary" @click.prevent="update" >Enregistrez</button>
                             </div>
                         </div>
                     </form>
                   </div>
-                  <div class="card-body" v-else-if="empty == 1">
+                   <div class="card-body" v-else-if="empty == 1">
                      <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
@@ -178,23 +168,23 @@
                     </div>
                   </div>
               </div>
-            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end bordered table -->
+          <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- end basic form  -->
+        <!-- end widgets   -->
         <!-- ============================================================== -->
-      </div>
-    </div>
-   
-  </div>
 
+      </div>
+  </div>
 </template>
 <script>
-export default {
+ export default {
 
   data(){
       return{
-          roles : {},
           data:{
               nom :  null,
               prenoms: null,
@@ -202,8 +192,6 @@ export default {
               telephone: null,
               sexe: null,
               adresse: null,
-              role_id: null,
-              password: null,
           },
           errors: {},
           errorcheck: true,
@@ -217,7 +205,7 @@ export default {
 
     getResults(){
       axios
-        .get('/api/settings/users/create')
+        .get(`/api/enseignants/${this.$route.params.id}/edit`)
         .then(response => {
           if(response.status == 200){
             if (response.data.success == false) {
@@ -226,19 +214,21 @@ export default {
               if (response.data.message == "Aucun role n'est enregistré") {
                 this.empty = 1
                 this.message = response.data.message
+              } else if(response.data.message == "Aucune Information trouvée."){
+                this.empty = 1
+                this.message = response.data.message
               } else {
                 this.empty = 0
-                this.roles = response.data.roles
-                
+                this.data = response.data.enseignant
               }
             }
           }
       });
     },
 
-    create(){
+    update(){
        this.loadingSave = true
-        axios.post('/api/settings/users/store', this.data)
+        axios.put(`/api/enseignants/${this.$route.params.id}/update`, this.data)
         .then(response => {
             if (response.data.success == true) {
                 this.$swal({
@@ -248,12 +238,11 @@ export default {
                     timer: 1000,
                     showConfirmButton: false
                 });
-                this.$router.push({name:"settings.users"})
+                this.$router.push({name:"EnseignantsComponent"})
             } else {
                 this.errorcheck = false
                 this.errors = response.data.errors
                 this.loadingSave = false
-                console.log(this.errors)
             }
         }).catch(error => console.log(error))
     }

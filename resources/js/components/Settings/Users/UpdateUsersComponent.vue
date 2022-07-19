@@ -202,6 +202,9 @@ export default {
               if (response.data.message == "Aucun role n'est enregistré") {
                 this.empty = 1
                 this.message = response.data.message
+              } else if(response.data.message == "Aucune Information trouvée."){
+                this.empty = 1
+                this.message = response.data.message
               } else {
                 this.empty = 0
                 this.roles = response.data.roles

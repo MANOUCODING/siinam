@@ -115,7 +115,7 @@ export default {
         loadingSave: false,
         errors: {} ,
         errorsAlert: null,
-        errorCheck: false
+        errorcheck: false
       }
   },
 
@@ -137,7 +137,7 @@ export default {
               }else if(response.data.message == "Ooops Desolé. La date de fin est antérieure à la date du debut"){
                 this.errorcheck = true
                 this.errorsAlert = response.data.message
-              }else if(response.data.message == "Ooops Desolé. Il ne peut pas avoir de rentrées scolaires inactives"){
+              }else if(response.data.message == "Ooops Desolé. Il ne peut pas avoir deux rentrées scolaires inactives"){
                 this.errorcheck = true
                 this.errorsAlert = response.data.message
               }
