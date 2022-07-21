@@ -98,6 +98,8 @@ Route::view('/settings/appreciations/semestres/colleges', 'dashboard');
 
 Route::view('/settings/appreciations/semestres/{id}/show', 'dashboard');
 
+Route::view('/settings/appreciations/semestres/{id}/show/{appreciation_id}/edit', 'dashboard');
+
 Route::view('/settings/appreciations/semestres/{id}/create', 'dashboard');
 
 Route::view('/settings/appreciations/semestres/lyceetechnique', 'dashboard');

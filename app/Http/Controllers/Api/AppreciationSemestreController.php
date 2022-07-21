@@ -225,18 +225,46 @@ class AppreciationSemestreController extends  BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $appreciation_id)
     {
 
         try {
 
-            $appreciationSemestre = AppreciationSemestre::findOrFail($id);
+            $classeCount = Classe::select('id', 'codeClasse')->where('id',$id)->count();
 
-            return response()->json([$appreciationSemestre]);
+            if($classeCount !== 0){
+
+                $classe = Classe::select('id', 'codeClasse')->where('id',$id)->first();
+
+                if ( $classe == null) {
+
+                    return response()->json(['message' => 'Aucune Information trouvée.']);
+                   
+                } else {
+
+                    $appreciationSemestre = AppreciationSemestre::where('id',$appreciation_id)->where('classe_id', $id)->first();
+
+                    if ( $appreciationSemestre == null ) {
+                    
+                        return response()->json(['classe' => $classe, 'message' => 'Aucune Information trouvée.']);
+
+                    } else {
+                    
+                        return response()->json(['classe' => $classe, 'appreciationSemestre' => $appreciationSemestre]);
+
+                    }
+
+                }
+
+            }else{
+
+                return $this->sendError('Aucune classe trouvée.');
+
+            }
 
         } catch (ModelNotFoundException $modelNotFoundException){
 
-            return $this->sendError('Aucune appréciation trouvée.');
+            return $this->sendError('Aucune classe trouvée.' );
 
         }
 
@@ -293,12 +321,11 @@ class AppreciationSemestreController extends  BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $appreciation_id)
     {
         $datas = $request->all();
 
         $validator = Validator::make($datas, [
-            'nomCycle' => 'required|string|between:2,100',
             'appreciation' => 'required|string|between:2,100',
             'moyFaible' => 'required|integer',
             'moyFort' => 'required|integer',
@@ -308,26 +335,26 @@ class AppreciationSemestreController extends  BaseController
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        if ($datas['moyFaible'] >= 0  && $datas['moyFort'] <= 20) {
+        if ($datas['moyFort'] >= 0  && $datas['moyFaible'] <= 20) {
 
-            if ($datas['moyFaible'] < $datas['moyFort']) {
-
-                $datas['moyFaible'] = number_format((float)$datas['moyFaible'], 2, ',', '');
+            if ($datas['moyFort'] < $datas['moyFaible']) {
 
                 $datas['moyFort'] = number_format((float)$datas['moyFort'], 2, ',', '');
 
-                $appreciationSemestre = AppreciationSemestre::findOrFail($id);
+                $datas['moyFaible'] = number_format((float)$datas['moyFaible'], 2, ',', '');
+
+                $appreciationSemestre = AppreciationSemestre::findOrFail($appreciation_id);
 
                 $appreciationSemestre->update($datas);
 
                 return $this->sendResponse($appreciationSemestre, 'Appreciation modifiée avec succès.');
 
             } else {
-                return $this->sendError('Ooops ! Desolé, vos moyennes doivent être positive et compris entre 0 et 20');
+                return $this->sendError('Ooops ! Desolé, verifiez l\'ecart de vos moyennes');
             }
 
         } else {
-            return $this->sendError('Ooops ! Desolé, verifiez l"ecart de vos moyennes');
+            return $this->sendError('Ooops ! Desolé, vos moyennes doivent être positive et compris entre 0 et 20');
         }
     }
 

@@ -46,6 +46,8 @@ import SettingsAppreciationSemestreClassesLyceeModerneComponent from '../compone
 
 import SettingsAppreciationSemestreCreateAppreciationSemestreComponent from '../components/Settings/AppreciationSemestre/CreateAppreciationSemestreComponent.vue';
 
+import SettingsAppreciationSemestreUpdateAppreciationSemestreComponent from '../components/Settings/AppreciationSemestre/UpdateAppreciationSemestreComponent.vue';
+
 import SettingsAppreciationSemestreClassesLyceeTechniqueComponent from '../components/Settings/AppreciationSemestre/LyceeTechnique/ClassesLyceeTechniqueComponent.vue';
 
 import SettingsAppreciationSemestreShowAppreciationComponent from '../components/Settings/AppreciationSemestre/ShowAppreciationComponent.vue';
@@ -346,6 +348,12 @@ const routes = [
     path: '/settings/appreciations/semestres/:id/create',
     component: SettingsAppreciationSemestreCreateAppreciationSemestreComponent,
     name: 'settings.appreciations.semestres.create'
+  }, 
+
+  {
+    path: '/settings/appreciations/semestres/:id/show/:appreciation_id/edit',
+    component: SettingsAppreciationSemestreUpdateAppreciationSemestreComponent,
+    name: 'settings.appreciations.semestres.update'
   }, 
 
   {

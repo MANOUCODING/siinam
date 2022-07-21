@@ -119,9 +119,11 @@ Route::get('/settings/appreciations/semestres/{id}/create', [AppreciationSemestr
 
 Route::get('/settings/appreciations/semestres/{id}/show', [AppreciationSemestreController::class, 'show']);
 
+Route::get('/settings/appreciations/semestres/{id}/show/{appreciation_id}/edit', [AppreciationSemestreController::class, 'edit']);
+
 Route::post('/settings/appreciations/semestres/{id}/store', [AppreciationSemestreController::class, 'store']);
 
-Route::patch('/settings/appreciations/semestres/{id}', [AppreciationSemestreController::class, 'update']);
+Route::put('/settings/appreciations/semestres/{id}/show/{appreciation_id}/update', [AppreciationSemestreController::class, 'update']);
 
 Route::delete('/settings/appreciations/semestres/{id}/destroy', [AppreciationSemestreController::class, 'destroy']);
 

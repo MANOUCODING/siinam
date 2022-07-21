@@ -52,7 +52,7 @@
                                       <div class="row" style="max-width: 100%" >
                                           
                                           <div class="col-md-3">
-                                            <router-link :to="{ name: 'settings.appreciations.matieres.update', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
+                                            <router-link :to="{ name: 'settings.appreciations.semestres.update', params: { id: info.classe_id, appreciation_id: info.id  }}" class="btn btn-xs btn-rounded btn-primary">
                                               <i class="fa fa-edit"></i>
                                             </router-link>
                                           </div>
