@@ -49,7 +49,7 @@
                                     <td>
                                       <div class="row" style="max-width: 100%" >
                                           <div class="col-md-3">
-                                            <router-link :to="{ name: 'settings.users.show', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-info">
+                                            <router-link :to="{ name: 'settings.users.show.connexions', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-info">
                                               <i class="fa fa-eye"></i>
                                             </router-link>
                                           </div>

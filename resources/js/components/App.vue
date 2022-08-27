@@ -45,57 +45,10 @@
 	                        </li>
 
 	                        <li class="nav-item">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-users"></i>Gestion des élèves</a>
-	                            <div id="submenu-2" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/cards.html">Cards <span class="badge badge-secondary">New</span></a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/general.html">General</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/carousel.html">Carousel</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/listgroup.html">List Group</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/typography.html">Typography</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/accordions.html">Accordions</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/tabs.html">Tabs</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+															<router-link class="nav-link" to="/eleves/colleges"><i class=" fas fa-users"></i>Gestion des éleves</router-link>
 	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-users"></i>Gestion des Abcences</a>
-	                            <div id="submenu-3" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/chart-c3.html">C3 Charts</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/chart-chartist.html">Chartist Charts</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/chart-charts.html">Chart</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/chart-morris.html">Morris</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/chart-sparkline.html">Sparkline</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/chart-gauge.html">Guage</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                         <li class="nav-item">
+	                            <router-link class="nav-link" to="/absences/home"><i class="fas fa-book"></i>Gestion des absences</router-link>
 	                        </li>
 
                           <li class="nav-item">
@@ -107,9 +60,12 @@
 	                        </li>
 
                           <li class="nav-item">
-	                            <router-link class="nav-link" to="#"><i class=" fas fa-bars"></i>Gestion des Affections</router-link>
+	                            <router-link class="nav-link" to="/affectations"><i class=" fas fa-bars"></i>Gestion des Affections</router-link>
 	                        </li>
 
+													<li class="nav-item">
+	                            <router-link class="nav-link" to="/finances/home"><i class=" fas fa-bars"></i>Gestion des finances</router-link>
+	                        </li>
 	                        
 	                       
 	                        <li class="nav-item">
@@ -162,23 +118,7 @@
 	                            </div>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-folder"></i>Mes Documents <span class="badge badge-secondary">New</span></a>
-	                            <div id="submenu-7" class="collapse submenu" style="">
-	                                <ul class="nav flex-column">
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/inbox.html">Inbox</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/email-details.html">Email Detail</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/email-compose.html">Email Compose</a>
-	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" href="pages/message-chat.html">Message Chat</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                             <router-link class="nav-link" to="/documents/home"><i class="fas fa-folder"></i>Mes Documents</router-link>
 	                        </li>
 	                        
 	                        <li class="nav-item">

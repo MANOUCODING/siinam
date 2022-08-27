@@ -80,6 +80,8 @@ class SchoolController extends BaseController
             'posteResponsable' => 'required|string',
             'nomDRE' => 'required|string',
             'nomIESEG' => 'required|string',
+            'denominationMinisterielTechnique' => 'required|string',
+            'denominationMinisterielGenerale' => 'required|string',
         ]);
 
         if($validator->fails()){
@@ -136,6 +138,8 @@ class SchoolController extends BaseController
             'posteResponsable' => 'required|string',
             'nomDRE' => 'required|string',
             'nomIESEG' => 'required|string',
+            'denominationMinisterielTechnique' => 'required|string',
+            'denominationMinisterielGenerale' => 'required|string',
         ]);
         if($validator->fails()){
             return  $this->sendError( 'Erreur de validation' , $validator->errors());

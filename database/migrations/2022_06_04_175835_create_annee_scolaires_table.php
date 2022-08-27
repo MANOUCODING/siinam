@@ -18,7 +18,9 @@ class CreateAnneeScolairesTable extends Migration
             $table->string('anneeScolaire');
             $table->date('dateDebut');
             $table->date('dateFin');
-            $table->string('TypePeriode');
+            $table->string('TypePeriodeCollege');
+            $table->string('TypePeriodeLyceeModerne');
+            $table->string('TypePeriodeLyceeTechnique');
             $table->string('status')->default('Inactif');
             $table->timestamps();
         });

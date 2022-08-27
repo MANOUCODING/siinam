@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="/assets/admin/vendor/fonts/fontawesome/css/fontawesome-all.css">
         <link rel="stylesheet" href="/assets/admin/vendor/charts/morris-bundle/morris.css">
         <link rel="stylesheet" href="/assets/admin/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">
+        <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
         <title>Gestion Scolaire || SINAM</title>
 
 
@@ -38,6 +40,16 @@
     <script src="/assets/admin/vendor/charts/charts-bundle/chartjs.js"></script>
     <!-- dashboard js -->
     <script src="/assets/admin/libs/js/dashboard-influencer.js"></script>
+        <!-- include VueJS first -->
+    <script src="https://unpkg.com/vue@latest"></script>
+
+    <!-- use the latest vue-select release -->
+    <script src="https://unpkg.com/vue-select@latest"></script>
+
+
+    <!-- or point to a specific vue-select release -->
+    <script src="https://unpkg.com/vue-select@3.0.0"></script>
+ 
     <script>
         $(document).ready(function() {
     

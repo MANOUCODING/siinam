@@ -49,26 +49,26 @@
                             <tbody v-for="info in infos.enseignants" :key="info.id">
                                 <tr>
                                     <th scope="row">{{ info.code  }}</th>
-                                    <td> {{ info.nom  }} {{ info.prenoms  }} </td>
-                                    <td> {{ info.telephone }}</td>
-                                    <td> {{ info.adresse  }} </td>
-                                    <td> {{ info.sexe  }} </td>
-                                    <td>  <button type="button" v-if="info.status" class="btn btn-xs btn-rounded btn-primary">Actif</button>
-                                     <button type="button" v-else class="btn btn-xs btn-rounded btn-secondary">Inactif</button>  </td>
+                                    <th scope="row"> {{ info.nom  }} {{ info.prenoms  }} </th>
+                                    <th scope="row"> {{ info.telephone }}</th>
+                                    <th scope="row"> {{ info.adresse  }} </th>
+                                    <th scope="row"> {{ info.sexe  }} </th>
+                                    <td>  <button type="button" v-if="info.status" class="btn btn-rounded btn-primary">Actif</button>
+                                     <button type="button" v-else class="btn btn-rounded btn-secondary">Inactif</button>  </td>
                                     <td>
                                       <div class="row" style="max-width: 100%" >
                                           <div class="col-md-3">
-                                            <router-link to="#" class="btn btn-xs btn-rounded btn-info">
+                                             <router-link :to="{ name:'ShowEnseignantsComponent', params: { id: info.id }}" class="btn btn-rounded btn-info">
                                               <i class="fa fa-eye"></i>
                                             </router-link>
                                           </div>
                                           <div class="col-md-3">
-                                            <router-link :to="{ name:'UpdateEnseignantComponent', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
+                                            <router-link :to="{ name:'UpdateEnseignantComponent', params: { id: info.id }}" class="btn btn-rounded btn-primary">
                                               <i class="fa fa-edit"></i>
                                             </router-link>
                                           </div>
                                           <div class="col-md-3">
-                                            <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteEnseignant(info.id)"> <i class="fa fa-trash"></i></button>
+                                            <button type="button" class="btn btn-rounded  btn-danger" @click="deleteEnseignant(info.id)"> <i class="fa fa-trash"></i></button>
                                           </div>
                                       </div>
                                     </td>

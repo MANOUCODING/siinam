@@ -7,13 +7,12 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h3 class="mb-2">Infulencer Dashboard Template </h3>
-                    <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                    <h3 class="mb-2">Tableau de bord</h3>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Influencer Dashboard Template</li>
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Tableau de bord</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tableau de bord</li>
                             </ol>
                         </nav>
                     </div>
@@ -35,11 +34,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-inline-block">
-                        <h5 class="text-muted">Total Views</h5>
-                        <h2 class="mb-0"> 10,28,056</h2>
+                        <h5 class="text-muted">Elèves Inscrits</h5>
+                        <h2 class="mb-0"> 10028</h2>
                     </div>
                     <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
-                        <i class="fa fa-eye fa-fw fa-sm text-info"></i>
+                        <i class="fa fa-users fa-fw fa-sm text-info"></i>
                     </div>
                 </div>
             </div>
@@ -54,8 +53,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-inline-block">
-                        <h5 class="text-muted">Total Followers</h5>
-                        <h2 class="mb-0"> 24,763</h2>
+                        <h5 class="text-muted">Enseignants</h5>
+                        <h2 class="mb-0"> 24</h2>
                     </div>
                     <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
                         <i class="fa fa-user fa-fw fa-sm text-primary"></i>
@@ -73,11 +72,11 @@
               <div class="card">
                   <div class="card-body">
                       <div class="d-inline-block">
-                          <h5 class="text-muted">Partnerships</h5>
+                          <h5 class="text-muted">Matières</h5>
                           <h2 class="mb-0">14</h2>
                       </div>
                       <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
-                          <i class="fa fa-handshake fa-fw fa-sm text-secondary"></i>
+                          <i class="fas fa-book fa-fw fa-sm text-secondary"></i>
                       </div>
                   </div>
               </div>
@@ -92,11 +91,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-inline-block">
-                        <h5 class="text-muted">Total Earned</h5>
-                        <h2 class="mb-0"> $149.00</h2>
+                        <h5 class="text-muted">Classes</h5>
+                        <h2 class="mb-0">19</h2>
                     </div>                  
                     <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
-                        <i class="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>
+                        <i class="fa fa-home fa-fw fa-sm text-brand"></i>
                     </div>
                 </div>
             </div>

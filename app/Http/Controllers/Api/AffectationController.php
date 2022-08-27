@@ -46,21 +46,23 @@ class AffectationController extends BaseController
 
                     if ($anneeScolaires == 0) {
     
-                        return response()->json(['message' => 'Aucune matiere n\'est enregistrée'], 200);
+                        return response()->json(['message' => 'Aucune rentrée scolaire n\'est enregistrée'], 200);
     
                     }else{
-                        $affectationsMatieresLitteraires = DB::table("enseignants") ->select(array("enseignants.id", "enseignants.nom", "enseignants.prenoms","enseignants.telephone", DB::raw('COUNT(affectations.id) as nbre_affectations')))
-                        ->where("matieres.Categorie", "Matières Littéraires")
+                        $affectations = DB::table("enseignants") ->select(array("enseignants.id", "enseignants.code","enseignants.nom", "enseignants.prenoms","users.telephone", "enseignants.sexe", DB::raw('COUNT(affectations.id) as nbre_affectations')))
                         ->leftJoin("affectations", "affectations.enseignant_id", "=", "enseignants.id")
-                        ->leftJoin("matieres", "matieres.id", "=", "affectations.matiere_id")
-                        ->groupBy("enseignants.id", "enseignants.nom", "enseignants.prenoms","enseignants.telephone")
+                        ->leftJoin("users", "users.id", "=", "enseignants.user_id")
+                        ->groupBy("enseignants.id", "enseignants.code","enseignants.nom", "enseignants.prenoms","users.telephone", "enseignants.sexe")
                         ->orderBy('nbre_affectations', 'desc')
                         ->get();
 
-                        $affectationsMatieresLitterairesCount = DB::table("enseignants")
-                        ->where("matieres.Categorie", "Matières Littéraires")
-                        ->leftJoin("matieres", "matieres.id", "=", "affectations.matiere_id")
+                        $affectationsCount = DB::table("enseignants") ->select(array("enseignants.id", "enseignants.nom", "enseignants.prenoms","users.telephone", "enseignants.sexe", DB::raw('COUNT(affectations.id) as nbre_affectations')))
+                        ->leftJoin("affectations", "affectations.enseignant_id", "=", "enseignants.id")
+                        ->leftJoin("users", "users.id", "=", "enseignants.user_id")
+                        ->orderBy('nbre_affectations', 'desc')
                         ->count();
+
+                        return response()->json(['message' => 'Liste de toutes les affectations', 'affectations' => $affectations, 'affectationsCount' => $affectationsCount], 200);
                         
                     }
 

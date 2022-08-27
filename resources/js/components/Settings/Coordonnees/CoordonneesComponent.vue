@@ -12,7 +12,7 @@
           </div>
 
       </div>
-      <div class="email-body" style="font-size: 1.6rem">
+      <div class="email-body" style="font-size: 1.3rem">
         <div class="row" v-if="empty == 0">
           <div class="col-md-4">
             <img src="/assets/admin/images/coordonnees.png" style="height: 200px; width: 200px;" alt="coordonnees"> <br>
@@ -57,27 +57,39 @@
                           </div>
                       </li>
                       <li class="list-group-item d-flex justify-content-between">
-                          <div>
-                              <h6 class="my-0">Addresse ligne 1</h6>
-                              <small >{{ coordonnes.addressLine1  }}</small>
-                          </div>
+                        <div>
+                          <h6 class="my-0">Addresse ligne 1</h6>
+                          <small >{{ coordonnes.addressLine1  }}</small>
+                        </div>
                       </li>
                       <li class="list-group-item d-flex justify-content-between">
-                          <div>
-                              <h6 class="my-0">Addresse ligne 2</h6>
-                              <small >{{ coordonnes.addressLine2  }}</small>
-                          </div>
+                        <div>
+                          <h6 class="my-0">Addresse ligne 2</h6>
+                          <small >{{ coordonnes.addressLine2  }}</small>
+                        </div>
                       </li>
                       <li class="list-group-item d-flex justify-content-between ">
-                          <div class="text-success">
-                              <h6 class="my-0">Nom DRE</h6>
-                              <small> {{coordonnes.nomDRE}} </small>
-                          </div>
+                        <div class="text-success">
+                          <h6 class="my-0">Nom DRE</h6>
+                          <small> {{coordonnes.nomDRE}} </small>
+                        </div>
                       </li>
                       <li class="list-group-item d-flex justify-content-between ">
+                        <div class="text-success">
+                          <h6 class="my-0">Nom IESEG</h6>
+                          <small>{{coordonnes.nomIESEG}}</small>
+                        </div>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between ">
+                        <div class="text-success">
+                          <h6 class="my-0">Denomination ministérielle du générale</h6>
+                          <small> {{coordonnes.denominationMinisterielGenerale}} </small>
+                        </div>
+                      </li>
+                       <li class="list-group-item d-flex justify-content-between ">
                           <div class="text-success">
-                              <h6 class="my-0">Nom IESEG</h6>
-                              <small>{{coordonnes.nomIESEG}}</small>
+                              <h6 class="my-0">Denomination ministérielle de la technique</h6>
+                              <small> {{coordonnes.denominationMinisterielTechnique}} </small>
                           </div>
                       </li>
                   </ul>

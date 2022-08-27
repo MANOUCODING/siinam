@@ -197,21 +197,34 @@ class ClasseController extends BaseController
     public function store(Request $request) {
 
         $datas = $request->all();
+
         $validator = Validator::make($datas, [
             'nomClasse' => 'required|string|between:2,100',
             'codeClasse' => 'required|string',
             'cycle' => 'required|string',
             'section' => 'required|string|between:2,100',
-            'finDeCycle' => 'required|integer',
+            'finDeCycle' => 'required|boolean',
             'classeSuperieure' => 'required|string',
             'capacite' => 'required|integer',
         ]);
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-       $classe = Classe::create($datas);
 
-        return $this->sendResponse($classe, 'La classe a été enregistrée avec succès.');
+        if($validator->fails()){
+
+            return $this->sendError("Erreur de validation", $validator->errors());
+
+        }
+
+        if ($datas['capacite'] > 5) {
+
+            $classe = Classe::create($datas);
+
+            return $this->sendResponse($classe, 'La classe a été enregistrée avec succès.');
+
+        } else {
+
+           return $this->sendError("La classe doit avoir une capacité minimum d'au moins 5 places.", $datas['capacite']);
+        }
+        
     }
 
 
@@ -225,11 +238,18 @@ class ClasseController extends BaseController
     {
 
         try {
+
            $classe = Classe::findOrFail($id);
 
+           if ($classe == null) {
 
+            return $this->sendError('Aucune Information trouvée.');
+
+           }else{
 
             return response()->json([$classe]);
+
+           }
 
         } catch (ModelNotFoundException $modelNotFoundException){
 
@@ -260,14 +280,23 @@ class ClasseController extends BaseController
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+
+            return $this->sendError("Erreur de validation", $validator->errors());
+
         }
 
-        $classe = Classe::findOrFail($id);
+        if ($datas['capacite'] > 5) {
 
-        $classe->update($datas);
+            $classe = Classe::findOrFail($id);
 
-        return $this->sendResponse($classe, 'Informations de l\'ecole modifiées avec succès.');
+            $classe->update($datas);
+    
+            return $this->sendResponse($classe, 'La classe a été modifié avec succès.');
+
+        } else {
+
+           return $this->sendError("La classe doit avoir une capacité minimum d'au moins 5 places.", $datas['capacite']);
+        }
     }
 
      /**

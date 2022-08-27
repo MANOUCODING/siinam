@@ -32,7 +32,7 @@
                       <div class="card-body">
                           <div class="d-inline-block">
                               <h5 class="text-muted">Collège</h5>
-                              <h2 class="mb-0"> 0 </h2>
+                              <h2 class="mb-0"> {{ infos.infosCollegeCount  }} </h2>
                           </div>
                           <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                               <i class="fa fa-home fa-fw fa-sm text-info"></i>
@@ -54,7 +54,7 @@
                       <div class="card-body">
                           <div class="d-inline-block">
                               <h5 class="text-muted">Lycée Moderne</h5>
-                              <h2 class="mb-0">0</h2>
+                              <h2 class="mb-0">{{ infos.infosLyceeModerneCount }}</h2>
                           </div>
                           <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
                               <i class="fa fa-home fa-fw fa-sm text-primary"></i>
@@ -75,7 +75,7 @@
                       <div class="card-body">
                           <div class="d-inline-block">
                               <h5 class="text-muted">Lycée Technique</h5>
-                              <h2 class="mb-0">0</h2>
+                              <h2 class="mb-0">{{ infos.infosLyceeTechniqueCount  }}</h2>
                           </div>
                           <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
                               <i class="fa fa-home fa-fw fa-sm text-secondary"></i>
@@ -93,30 +93,62 @@
           <!-- ============================================================== -->
           <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
-                  <h5 class="card-header">Liste des decisions pour le lycee moderne</h5>
-                  <div class="card-body" v-if="!empty">
+                  <h5 class="card-header">Liste des decisions pour le lycée moderne</h5>
+                  <div class="card-body" v-if="empty == 0">
                       <table class="table table-bordered">
                           <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Code</th>
                                 <th scope="col">Nom</th>
-                                <th scope="col">Fin de cycle</th>
+                                 <th scope="col">Fin Cycle</th>
                                 <th scope="col">Nbre Decsions</th>
                                 <th scope="col">Actions</th>
                             </tr>
                           </thead>
-                          <tbody>
-                              <!-- <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                              </tr> -->
+                          <tbody v-for="info in infos.infosLyceeModerne" :key="info">
+                              <tr>
+                                  <th scope="row"> {{info.id}} </th>
+                                  <td> {{info.code }} </td>
+                                  <td> {{info.niveau }} </td>
+                                  <td v-if="info.finDeCycle == 1">
+                                    <button type="button" class="btn btn-xs btn-rounded btn-primary">
+                                     OUI
+                                    </button>
+                                  </td>
+                                  <td v-else>
+                                    <button type="button" class="btn btn-xs btn-rounded  btn-dark">
+                                     NON
+                                    </button>
+                                  </td>
+                                 <td v-if="info.nbreDecision == 0">
+                                    <router-link :to="{ name: 'settings.decisions.conseils.show.triplants', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
+                                     Pas décisions
+                                    </router-link> 
+                                  </td>
+                                  <td v-else>
+                                    <router-link :to="{ name: 'settings.decisions.conseils.show.triplants', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary"> 
+                                      {{ info.nbreDecision }} décision(s)
+                                    </router-link> 
+                                  </td>
+                                  <td>
+                                    <div class="row" style="max-width: 100%" >
+                                      <div class="col-md-3">
+                                        <router-link :to="{ name: 'settings.decisions.conseils.show.triplants', params: { id: info.id }}" class="btn btn-xs btn-rounded btn-primary">
+                                          <i class="fa fa-eye"></i>
+                                        </router-link>
+                                      </div>
+                                      <div class="col-md-1"></div>
+                                      <div class="col-md-3">
+                                        <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteDecisionConseilAll(info.id)"> <i class="fa fa-trash"></i></button>
+                                      </div>
+                                    </div>
+                                  </td>
+                              </tr>
                           </tbody>
                       </table>
                   </div>
-                  <div class="card-body" v-else>
+                  <div class="card-body" v-else-if="empty == 1">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
@@ -154,10 +186,78 @@ export default {
   data() {
       return {
         infos: {},
-        empty : 1,
+        empty : null,
         message: "",
       }
   },
+
+  methods:{
+    getResults(){
+      axios
+        .get('/api/settings/decisions/conseils/triplants')
+        .then(response => {
+          if(response.status == 200){
+            if (response.data.success == false) {
+              if (response.data.message == 'Desolé nous ne trouvons aucune classe disponible') {
+                this.empty = 1
+                this.message = response.data.message
+              } 
+            }else{
+               if (response.data.message == 'Desolé nous ne trouvons aucune classe disponible') {
+                this.empty = 1
+                this.message = response.data.message
+              } else{
+                this.empty = 0
+                this.infos = response.data
+              }
+            }
+          }
+      });
+    },
+
+    
+   deleteDecisionConseilAll(id) {
+      this.$swal({
+        title: "Etes-vous sûr?",
+        text: "Vous ne pourrez plus récupérer ces données!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "blue",
+        confirmButtonText: "Oui, supprimez!",
+        cancelButtonText: "Non, annuler !",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }).then((confirmed) => {
+        if (confirmed.isConfirmed) {
+          axios
+          .delete(`/api/settings/decisions/conseils/${id}/destroyAll/triplants`)
+          .then(response => {
+              this.getResults();
+                if (response.data.message == 'Toutes les décisions de cette classe ont été supprimée avec succès.') {
+                  this.$swal({
+                      title: "Succès!",
+                      text: response.data.message,
+                      icon: "success",
+                      timer: 1000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  this.$swal({
+                      title: "Erreur",
+                      text: response.data.message,
+                      icon: "error",
+                      timer: 1000
+                  });
+              }
+          });
+        }
+      });
+    },
+  },
+
+  mounted(){
+    this.getResults();
+  }
   
 }
 </script>

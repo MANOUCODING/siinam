@@ -105,6 +105,35 @@
                               </div>
                           </div>
                         </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div class="form-group" v-if="!errors.denominationMinisterielTechnique">
+                              <label for="inputText3" class="col-form-label">Denomination ministérielle de la technique</label>
+                              <input id="inputText3" name="denominationMinisterielTechnique" v-model="data.denominationMinisterielTechnique" type="text" class="form-control">
+                          </div>
+                           <div class="form-group" v-else>
+                              <label for="inputText3" class="col-form-label">Denomination ministérielle de la technique</label>
+                              <input id="inputText3" name="denominationMinisterielTechnique" v-model="data.denominationMinisterielTechnique" type="text"  class="form-control is-invalid" aria-describedby="validationServer03Feedback" required>
+                              <div  v-for=" error_denominationMinisterielTechnique in errors.denominationMinisterielTechnique" :key="error_denominationMinisterielTechnique"  class="invalid-feedback"  style="color: red; font-size: 0.9em">
+                                  {{ error_denominationMinisterielTechnique }}
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div class="form-group" v-if="!errors.denominationMinisterielGenerale">
+                              <label for="inputText3" class="col-form-label">Denomination ministérielle du Générale</label>
+                              <input id="inputText3" name="denominationMinisterielGenerale" v-model="data.denominationMinisterielGenerale" type="text" class="form-control">
+                          </div>
+                           <div class="form-group" v-else>
+                              <label for="inputText3" class="col-form-label">Denomination ministérielle du Générale</label>
+                              <input id="inputText3" name="denominationMinisterielGenerale" v-model="data.denominationMinisterielGenerale" type="text"  class="form-control is-invalid" aria-describedby="validationServer03Feedback" required>
+                              <div  v-for=" error_denominationMinisterielGenerale in errors.denominationMinisterielGenerale" :key="error_denominationMinisterielGenerale"  class="invalid-feedback"  style="color: red; font-size: 0.9em">
+                                  {{ error_denominationMinisterielGenerale }}
+                              </div>
+                          </div>
+                        </div>
+                       
                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div v-if="!errors.posteResponsable">
                                 <h5>Choisir le poste Responsable</h5>
@@ -178,7 +207,9 @@ export default {
           nomDRE: null,
           nomIESEG: null,
           nomResponsable: null,
-          posteResponsable: null
+          posteResponsable: null,
+          denominationMinisterielGenerale: null,
+          denominationMinisterielTechnique: null
         },
       empty: null,
       errors: {},

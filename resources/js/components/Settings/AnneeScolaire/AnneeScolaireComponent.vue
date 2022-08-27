@@ -27,7 +27,6 @@
                                   <th class="border-0">Année</th>
                                   <th class="border-0">Date Debut</th>
                                   <th class="border-0">Date Fin</th>
-                                  <th class="border-0">Période</th>
                                   <th class="border-0">Etat</th>
                                   <th class="border-0">Actions</th>
                               </tr>
@@ -37,7 +36,6 @@
                                   <td> {{ info.anneeScolaire  }} </td>
                                   <td> {{ info.dateDebut  }}</td>
                                   <td> {{ info.dateFin  }} </td>
-                                  <td> {{ info.TypePeriode  }} </td>
                                   <td> 
                                   <button type="button" v-if="info.status == 'Inactif'" class="btn btn-xs btn-rounded btn-secondary" @click="activerRentree(info.id)">Inactif</button>
                                      <button type="submit" v-else-if="info.status == 'En Cours'" class="btn btn-xs btn-rounded btn-primary">En Cours ...</button> 

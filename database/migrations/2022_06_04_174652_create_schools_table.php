@@ -22,6 +22,8 @@ class CreateSchoolsTable extends Migration
             $table->string('posteResponsable');
             $table->string('nomDRE');
             $table->string('nomIESEG');
+            $table->string('denominationMinisterielGenerale');
+            $table->string('denominationMinisterielTechnique');
             $table->timestamps();
         });
     }

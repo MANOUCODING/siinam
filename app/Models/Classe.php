@@ -22,4 +22,10 @@ class Classe extends Model
         return $this->hasMany(AppreciationSemestre::class);
         
     }
+
+    public function DecisionConseilClasses(){
+
+        return $this->hasMany(DecisionConseil::class);
+
+    }
 }

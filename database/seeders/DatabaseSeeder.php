@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call([MatiereTableSeeder::class]);
         $this->call([SchoolTableSeeder::class]);
         $this->call([RoleTableSeeder::class]);
+        $this->call([ScolariteTableSeeder::class]);
     }
 }

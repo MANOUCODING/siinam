@@ -98,14 +98,17 @@
           <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="card">
                   <h5 class="card-header">Liste des classes du collège</h5>
+                  <div>
+                        <router-link style="float: right; margin-top: -45px; margin-right: 17px" :to='{name:"CreateClasseCollegeComponent"}' class="btn btn-rounded btn-primary"><i class="fa fa-plus"></i>Ajouter une Classe</router-link>
+                    </div>
                   <div class="card-body" v-if="empty === 0">
                       <table class="table table-bordered">
                           <thead>
-                            <tr>
+                           <tr>
                                 <th scope="col">Code</th>
-                                <th scope="col">Nom</th>
+                                <th scope="col">Classe</th>
                                 <th scope="col">Classe superieure</th>
-                                <th scope="col">Effectif total</th>
+                                <th scope="col">Effectif</th>
                                 <th scope="col">Capacité</th>
                                 <th scope="col">Etat</th>
                                 <th scope="col">Sous Classes</th>
@@ -114,28 +117,32 @@
                           </thead>
                           <tbody v-for="info in infos.classesCollege" :key="info.id">
                               <tr>
-                                  <td> {{ info.codeClasse  }} </td>
-                                  <td> {{ info.nomClasse  }} </td>
-                                  <td> {{ info.classeSuperieure }} </td>
-                                  <td> {{ info.effectifTotal  }} </td>
-                                  <td> {{ info.capacite  }} </td>
-                                  <td> <button type="button" v-if="info.effectifTotal < info.capacite  " class="btn btn-xs btn-rounded btn-success">Disponible</button>
-                                     <button type="submit" v-else class="btn btn-xs btn-rounded btn-secondary">Plus de places</button> 
+                                  <th scope="col">{{ info.codeClasse  }} </th>
+                                  <th scope="col">{{ info.nomClasse  }} </th>
+                                  <th scope="col">{{ info.classeSuperieure }} </th>
+                                  <th scope="col">{{ info.effectifTotal  }} </th>
+                                  <th scope="col">{{ info.capacite  }} </th>
+                                  <td> <button type="button" v-if="info.effectifTotal < info.capacite  " class="btn btn-rounded btn-success">Disponible</button>
+                                     <button type="submit" v-else class="btn btn-rounded btn-secondary">Plus de places</button> 
                                     </td>
                                   <td>
-                                     <button type="button" v-if="info.sousClasses" class="btn btn-xs btn-rounded btn-brand" @click="sousClasses(info.id)">Voir les sous classes</button>
-                                     <button type="button" v-else class="btn btn-xs btn-rounded btn-dark">Pas de sous classes</button>
+                                     <button type="button" v-if="info.sousClasses" class="btn btn-rounded btn-brand" @click="sousClasses(info.id)">Voir les sous classes</button>
+                                     <button type="button" v-else class="btn btn-rounded btn-dark">Pas de sous classes</button>
                                   </td>
                                   <td>
                                     <div class="row" style="max-width: 100%" >
-                                        <div class="col-md-3">
-                                          <router-link to="#" class="btn btn-xs btn-rounded btn-info">
+                                        <div class="col-md-4">
+                                          <router-link :to="{ name:'UpdateClasseCollegeComponent', params: { id: info.id }}" class="btn btn-rounded btn-primary">
+                                            <i class="fa fa-edit"></i>
+                                          </router-link>
+                                        </div>
+                                       <div class="col-md-4">
+                                          <router-link :to="{ name:'ShowClassesEmpoiDuTempsComponent', params: { id: info.id }}" class="btn btn-rounded btn-info">
                                             <i class="fa fa-eye"></i>
                                           </router-link>
                                         </div>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn btn-xs btn-rounded  btn-danger" @click="deleteClasse(info.id)"> <i class="fa fa-trash"></i></button>
+                                        <div class="col-md-4">
+                                          <button type="button" class="btn btn-rounded  btn-danger" @click="deleteClasse(info.id)"> <i class="fa fa-trash"></i></button>
                                         </div>
                                     </div>
                                   </td>

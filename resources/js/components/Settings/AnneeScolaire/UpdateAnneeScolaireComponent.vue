@@ -57,22 +57,68 @@
                       <hr>
                       <div class="row">
                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div v-if="data.typePeriodeBoolean">
-                              <h5> Definir une période </h5>
+                          <div v-if="data.typePeriodeBooleanCollege">
+                              <h5> Definir une période pour le collège </h5>
                               <label class="custom-control custom-radio custom-control-inline">
-                                  <input type="radio" name="typePeriodeBoolean" v-model="data.typePeriodeBoolean" checked="" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
+                                  <input type="radio" name="typePeriodeBooleanCollege" v-model="data.typePeriodeBooleanCollege" checked="" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
                               </label>
                               <label class="custom-control custom-radio custom-control-inline">
-                                  <input type="radio" name="typePeriodeBoolean" v-model="data.typePeriodeBoolean"   @click="typePeriodeH()" class="custom-control-input"><span class="custom-control-label">Semestre</span>
+                                  <input type="radio" name="typePeriodeBooleanCollege" v-model="data.typePeriodeBooleanCollege"   @click="typePeriodeCollegeH()" class="custom-control-input"><span class="custom-control-label">Semestre</span>
                               </label>
                           </div>
                           <div v-else>
-                              <h5>  Definir une période </h5>
+                              <h5>Definir une période pour le collège </h5>
                               <label class="custom-control custom-radio custom-control-inline">
-                                  <input type="radio" name="typePeriodeBoolean" v-model="data.typePeriodeBoolean" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
+                                  <input type="radio" name="typePeriodeBooleanCollege" v-model="data.typePeriodeBooleanCollege" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
                               </label>
                               <label class="custom-control custom-radio custom-control-inline">
-                                  <input type="radio" name="typePeriodeBoolean" v-model="data.typePeriodeBoolean"  checked="" class="custom-control-input"><span class="custom-control-label">Semestre</span>
+                                  <input type="radio" name="typePeriodeBooleanCollege" v-model="data.typePeriodeBooleanCollege"  checked="" class="custom-control-input"><span class="custom-control-label">Semestre</span>
+                              </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div v-if="data.typePeriodeBooleanLyceeModerne">
+                              <h5> Definir une période pour le lycée moderne </h5>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeModerne" v-model="data.typePeriodeBooleanLyceeModerne" checked="" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
+                              </label>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeModerne" v-model="data.typePeriodeBooleanLyceeModerne"   @click="typePeriodeLyceeModerneH()" class="custom-control-input"><span class="custom-control-label">Semestre</span>
+                              </label>
+                          </div>
+                          <div v-else>
+                              <h5> Definir une période pour le lycée moderne</h5>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeModerne" v-model="data.typePeriodeBooleanLyceeModerne" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
+                              </label>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeModerne" v-model="data.typePeriodeBooleanLyceeModerne"  checked="" class="custom-control-input"><span class="custom-control-label">Semestre</span>
+                              </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div v-if="data.typePeriodeBooleanLyceeTechnique">
+                              <h5> Definir une période pour le lycée technique </h5>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeTechnique" v-model="data.typePeriodeBooleanLyceeTechnique" checked="" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
+                              </label>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeTechnique" v-model="data.typePeriodeBooleanLyceeTechnique"   @click="typePeriodeLyceeTechniqueH()" class="custom-control-input"><span class="custom-control-label">Semestre</span>
+                              </label>
+                          </div>
+                          <div v-else>
+                              <h5> Definir une période pour le lycée technique</h5>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeTechnique" v-model="data.typePeriodeBooleanLyceeTechnique" class="custom-control-input"><span class="custom-control-label">Trimestre</span>
+                              </label>
+                              <label class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" name="typePeriodeBooleanLyceeTechnique" v-model="data.typePeriodeBooleanLyceeTechnique"  checked="" class="custom-control-input"><span class="custom-control-label">Semestre</span>
                               </label>
                           </div>
                         </div>
@@ -122,7 +168,9 @@ export default {
           TypePeriode: "Semestre",
           dateDebut: null,
           dateFin: null,
-          typePeriodeBoolean : 0,
+          typePeriodeBooleanCollege : 0,
+          typePeriodeBooleanLyceeModerne : 0,
+          typePeriodeBooleanLyceeTechnique : 0,
         },
         loadingSave: false,
         errors: {} ,
@@ -140,7 +188,9 @@ export default {
         .put(`/api/settings/rentree/scolaire/${this.$route.params.id}/update`,{
           dateDebut: this.data.dateDebut,
           dateFin: this.data.dateFin,
-          TypePeriode: this.data.typePeriodeBoolean ? "Trimestre" : "Semestre"
+          TypePeriodeCollege: this.data.typePeriodeBooleanCollege ? "Trimestre" : "Semestre",
+          TypePeriodeLyceeModerne: this.data.typePeriodeBooleanLyceeModerne ? "Trimestre" : "Semestre",
+          TypePeriodeLyceeTechnique: this.data.typePeriodeBooleanLyceeTechnique ? "Trimestre" : "Semestre"
         })
         .then(response => {
           if(response.status == 200){
@@ -170,8 +220,14 @@ export default {
           }
       });
     },
-    typePeriodeH(){
-      this.data.typePeriodeBoolean = 0
+    typePeriodeCollegeH(){
+      this.data.typePeriodeBooleanCollege = 0
+    },
+    typePeriodeLyceeModerneH(){
+      this.data.typePeriodeBooleanLyceeModerne = 0
+    },
+    typePeriodeLyceeTechniqueH(){
+      this.data.typePeriodeBooleanLyceeTechnique = 0
     },
 
     getResults(){
@@ -192,10 +248,22 @@ export default {
                 this.empty = 0
                 this.data = response.data[0]
 
-                if (this.data.TypePeriode == "Trimestre") {
-                  this.data.typePeriodeBoolean = 1
+                if (this.data.TypePeriodeCollege == "Trimestre") {
+                  this.data.typePeriodeBooleanCollege = 1
                 } else {
-                  this.data.typePeriodeBoolean = 0
+                  this.data.typePeriodeBooleanCollege = 0
+                }
+
+                if (this.data.TypePeriodeLyceeModerne == "Trimestre") {
+                  this.data.typePeriodeBooleanLyceeModerne = 1
+                } else {
+                  this.data.typePeriodeBooleanLyceeModerne = 0
+                }
+
+                if (this.data.TypePeriodeLyceeTechnique == "Trimestre") {
+                  this.data.typePeriodeBooleanLyceeTechnique = 1
+                } else {
+                  this.data.typePeriodeBooleanLyceeTechnique = 0
                 }
               }
             }

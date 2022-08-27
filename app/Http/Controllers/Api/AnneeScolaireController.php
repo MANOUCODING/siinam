@@ -69,11 +69,15 @@ class AnneeScolaireController extends BaseController
         $validator = Validator::make($datas, [
             'dateDebut' => 'required',
             'dateFin' => 'required',
-            'TypePeriode' => 'required|string',
+            'TypePeriodeCollege' => 'required|string',
+            'TypePeriodeLyceeModerne' => 'required|string',
+            'TypePeriodeLyceeTechnique' => 'required|string',
         ]);
 
         if($validator->fails()){
+
             return $this->sendError("Erreur de validation", $validator->errors());
+            
         }
 
         if($datas['dateDebut'] < $datas['dateFin'] ){
@@ -153,10 +157,13 @@ class AnneeScolaireController extends BaseController
         $validator = Validator::make($datas, [
             'dateDebut' => 'required',
             'dateFin' => 'required',
-            'TypePeriode' => 'required|string',
+            'TypePeriodeCollege' => 'required|string',
+            'TypePeriodeLyceeModerne' => 'required|string',
+            'TypePeriodeLyceeTechnique' => 'required|string',
         ]);
 
         if($validator->fails()){
+            
             return $this->sendError("Erreur de validation", $validator->errors());
         }
 

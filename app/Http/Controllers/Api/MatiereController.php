@@ -193,7 +193,9 @@ class MatiereController extends BaseController
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+
+            return $this->sendError("Erreur de validation", $validator->errors());
+
         }
 
         $matiere = Matiere::create($datas);
@@ -212,9 +214,18 @@ class MatiereController extends BaseController
     {
 
         try {
+
             $matiere = Matiere::findOrFail($id);
 
-            return response()->json([$matiere]);
+            if ($matiere == null) {
+
+                return response()->json(['matiere' => $matiere,'message' => 'Aucune matiere trouvée.']);
+
+            } else {
+
+                return response()->json(['matiere' => $matiere]);
+
+            }
 
         } catch (ModelNotFoundException $modelNotFoundException){
 
@@ -240,11 +251,13 @@ class MatiereController extends BaseController
             'codeMatiere' => 'required|string|between:2,100',
             'nomMatiere' => 'required|string',
             'Categorie' => 'required|string',
-            'OrdreBulletin' => 'required|integer|unique:matieres',
+            'OrdreBulletin' => 'required|integer',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+
+            return $this->sendError("Erreur de validation", $validator->errors());
+
         }
 
        $matiere = Matiere::findOrFail($id);

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\AffectationController;
 use App\Http\Controllers\Api\AnneeScolaireController;
 use App\Http\Controllers\Api\AppreciationMatiereController;
 use App\Http\Controllers\Api\AppreciationSemestreController;
 use App\Http\Controllers\Api\ClasseController;
 use App\Http\Controllers\Api\DecisionConseilController;
+use App\Http\Controllers\Api\EleveController;
 use App\Http\Controllers\Api\EnseignantController;
 use App\Http\Controllers\Api\MatiereController;
 use App\Http\Controllers\Api\PersonnelController;
@@ -45,17 +47,48 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 
 // Parametres Decision de conseil de fin d'année
 
-Route::get('/settings/decisions/conseils', [DecisionConseilController::class, 'index']);
+Route::get('/settings/decisions/conseils/nouveaux', [DecisionConseilController::class, 'nouveaux']);
 
-Route::get('/settings/decisions/conseils/create', [DecisionConseilController::class, 'create']);
+Route::get('/settings/decisions/conseils/nouveaux/{id}/show', [DecisionConseilController::class, 'showNouveaux']);
 
-Route::get('/settings/decisions/conseils/{id}/edit', [DecisionConseilController::class, 'edit']);
+Route::get('/settings/decisions/conseils/nouveaux/{id}/show/{decision_id}/edit', [DecisionConseilController::class, 'editNouveaux']);
 
-Route::post('/settings/decisions/conseils', [DecisionConseilController::class, 'store']);
+Route::delete('/settings/decisions/conseils/{id}/destroyAll/nouveaux', [DecisionConseilController::class, 'destroyAllNouveaux']);
 
-Route::patch('/settings/decisions/conseils/{id}', [DecisionConseilController::class, 'update']);
+Route::get('/settings/decisions/conseils/doublants', [DecisionConseilController::class, 'doublants']);
 
-Route::delete('/settings/decisions/conseils/{id}', [DecisionConseilController::class, 'destroy']);
+Route::get('/settings/decisions/conseils/doublants/{id}/show', [DecisionConseilController::class, 'showDoublants']);
+
+Route::get('/settings/decisions/conseils/doublants/{id}/show/{decision_id}/edit', [DecisionConseilController::class, 'editDoublants']);
+
+Route::delete('/settings/decisions/conseils/{id}/destroyAll/doublants', [DecisionConseilController::class, 'destroyAllDoublants']);
+
+
+Route::get('/settings/decisions/conseils/triplants', [DecisionConseilController::class, 'triplants']);
+
+Route::get('/settings/decisions/conseils/triplants/{id}/show', [DecisionConseilController::class, 'showTriplants']);
+
+Route::get('/settings/decisions/conseils/triplants/{id}/show/{decision_id}/edit', [DecisionConseilController::class, 'editTriplants']);
+
+Route::delete('/settings/decisions/conseils/{id}/destroyAll/triplants', [DecisionConseilController::class, 'destroyAllTriplants']);
+
+Route::get('/settings/decisions/conseils/quadruplants', [DecisionConseilController::class, 'quadruplants']);
+
+Route::get('/settings/decisions/conseils/quadruplants/{id}/show', [DecisionConseilController::class, 'showQuadruplants']);
+
+Route::get('/settings/decisions/conseils/quadruplants/{id}/show/{decision_id}/edit', [DecisionConseilController::class, 'editQuadruplants']);
+
+Route::delete('/settings/decisions/conseils/{id}/destroyAll/quadruplants', [DecisionConseilController::class, 'destroyAllQuadruplants']);
+
+Route::put('/settings/decisions/conseils/{id}/show/{decision_id}/update', [DecisionConseilController::class, 'update']);
+
+Route::get('/settings/decisions/conseils/{id}/create', [DecisionConseilController::class, 'create']);
+
+Route::post('/settings/decisions/conseils/{id}/store', [DecisionConseilController::class, 'store']);
+
+Route::delete('/settings/decisions/conseils/{id}/destroy', [DecisionConseilController::class, 'destroy']);
+
+
 
 
 // Parametres gestion des utilisateurs
@@ -159,9 +192,9 @@ Route::get('/classes/create', [ClasseController::class, 'create']);
 
 Route::get('/classes/{id}/edit', [ClasseController::class, 'edit']);
 
-Route::post('/classes', [ClasseController::class, 'store']);
+Route::post('/classes/store', [ClasseController::class, 'store']);
 
-Route::patch('/classes/{id}', [ClasseController::class, 'update']);
+Route::put('/classes/{id}/update', [ClasseController::class, 'update']);
 
 Route::delete('/classes/{id}', [ClasseController::class, 'destroy']);
 
@@ -179,9 +212,9 @@ Route::get('/matieres/create', [MatiereController::class, 'create']);
 
 Route::get('/matieres/{id}/edit', [MatiereController::class, 'edit']);
 
-Route::post('/matieres', [MatiereController::class, 'store']);
+Route::post('/matieres/store', [MatiereController::class, 'store']);
 
-Route::patch('/matieres/{id}', [MatiereController::class, 'update']);
+Route::put('/matieres/{id}/update', [MatiereController::class, 'update']);
 
 Route::delete('/matieres/{id}', [MatiereController::class, 'destroy']);
 
@@ -198,3 +231,27 @@ Route::post('/enseignants/store', [EnseignantController::class, 'store']);
 Route::put('/enseignants/{id}/update', [EnseignantController::class, 'update']);
 
 Route::delete('/enseignants/{id}', [EnseignantController::class, 'destroy']);
+
+// Gestion des élèves
+
+Route::get('/eleves', [EleveController::class, 'index']);
+
+Route::get('/eleves/classes/{id}/status', [EleveController::class, 'status']);
+
+Route::get('/eleves/classes/{id}', [EleveController::class, 'showClasses']);
+
+Route::get('/eleves/create/{section}/stepOne', [EleveController::class, 'stepOne']);
+
+Route::get('/eleves/create', [EleveController::class, 'create']);
+
+Route::get('/eleves/{id}/edit', [EleveController::class, 'edit']);
+
+Route::post('/eleves/store', [EleveController::class, 'store']);
+
+Route::put('/eleves/{id}/update', [EleveController::class, 'update']);
+
+Route::delete('/eleves/{id}', [EleveController::class, 'destroy']);
+
+// Gestion des élèves
+
+Route::get('/affectations', [AffectationController::class, 'index']);

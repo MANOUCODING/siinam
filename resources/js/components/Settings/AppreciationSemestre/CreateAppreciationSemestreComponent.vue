@@ -179,7 +179,6 @@ export default {
                 this.emptyF = 1
                 this.message = response.data.message
                 this.infos = response.data
-                console.log(response.data)
               } else{
                 this.emptyF = 0
                 this.empty = 0

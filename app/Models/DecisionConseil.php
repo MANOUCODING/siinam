@@ -10,5 +10,10 @@ class DecisionConseil extends Model
     use HasFactory;
 
     protected $guarded = [];
-    
+
+    public function classesDecisionConseil(){
+
+        return $this->belongsTo(Classe::class);
+
+    }
 }
